@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
-import { ScrollArea } from "./ui/scroll-area"
-import { Badge } from "./ui/badge"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Badge } from "@/components/ui/badge"
 
 interface ReviewResultProps {
   result: string | null

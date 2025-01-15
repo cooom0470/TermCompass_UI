@@ -2,9 +2,9 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Layout from '../components/Layout'
-import { Button } from "../components/ui/button"
-import { Input } from "../components/ui/input"
-import { ScrollArea } from "../components/ui/scroll-area"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { useToast } from "@/hooks/use-toast"
 
 const dummyResponses = [

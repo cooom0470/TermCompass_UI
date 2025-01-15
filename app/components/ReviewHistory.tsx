@@ -1,4 +1,4 @@
-import { ScrollArea } from "./ui/scroll-area"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 const dummyHistory = [
   { id: 1, date: '2023-06-25', title: '이용약관 검토' },

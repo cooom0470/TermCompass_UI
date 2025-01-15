@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Button } from "../components/ui/button"
+import { Button } from "@/components/ui/button"
 import AuthForm from './AuthForm'
 import { useUser } from '../contexts/UserContext'
 import { useToast } from "@/hooks/use-toast"
@@ -60,7 +61,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen flex flex-col bg-gray-50">
       <header className="bg-gray-500 text-white shadow-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold">약관나침반</Link>
+          <Link href="/" className="text-2xl font-bold">
+              <Image
+                  src={`/TermCompass_logo.png`}
+                  alt={'logo'}
+                  width={50}
+                  height={50}
+              />
+          </Link>
           <nav>
             <ul className="flex space-x-4">
               {navItems.map((item) => (

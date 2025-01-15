@@ -3,8 +3,8 @@
 import { useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import Layout from '../../components/Layout'
-import { Card, CardHeader, CardTitle, CardContent } from "../../components/ui/card"
-import { Badge } from "../../components/ui/badge"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 
 interface AIReviewResult {
   grade: string

@@ -2,7 +2,7 @@
 
 import { useParams, useRouter } from 'next/navigation'
 import Layout from '../../../components/Layout'
-import { Button } from "@/app/components/ui/button"
+import { Button } from "@/components/ui/button"
 import {
   Table,
   TableBody,
@@ -10,7 +10,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/app/components/ui/table"
+} from "@/components/ui/table"
 
 const dummyGradeHistory = {
   'naver.com': [
