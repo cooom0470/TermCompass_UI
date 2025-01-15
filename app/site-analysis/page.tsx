@@ -139,7 +139,7 @@ export default function SiteRatings() {
 
   return (
     <Layout>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold mb-6 text-blue-800">사이트별 등급과 약관 평가</h1>
         <div className="bg-white p-6 rounded-lg shadow-md">
           <Input
@@ -149,12 +149,12 @@ export default function SiteRatings() {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="mb-4"
           />
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
             {filteredRatings.map((site) => (
               <Link href={`/site-analysis/${site.domain}`} key={site.domain} className="block">
-                <div className="border p-4 rounded-lg hover:shadow-md transition-shadow">
+                <div className="border p-4 rounded-lg hover:shadow-md transition-shadow h-full">
                   <div className="flex items-center mb-2">
-                    <Image src={`https://images.seeklogo.com/logo-png/35/1/kakaotalk-logo-png_seeklogo-355085.png?v=1957906406423334432`} alt={`${site.name} 로고`} width={50} height={50} className="mr-4" />
+                    <Image src={`/placeholder.svg?height=50&width=50&text=${site.name} Logo`} alt={`${site.name} 로고`} width={50} height={50} className="mr-4" />
                     <div>
                       <h2 className="text-xl font-semibold">{site.name}</h2>
                       <p className="text-blue-600">{site.domain}</p>
