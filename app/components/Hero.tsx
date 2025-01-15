@@ -2,9 +2,9 @@ import Image from 'next/image'
 
 export default function Hero() {
   return (
-    <div className="relative h-[500px] flex items-center justify-center text-black">
+    <div className="relative h-[500px] flex items-center justify-center text-gray">
       <Image
-        src="/placeholder.svg?height=500&width=1200&text=TermCompass Hero Image"
+        src="/herobackground.jpg?height=500&width=1200&text=TermCompass Hero Image"
         alt="TermCompass Hero Image"
         layout="fill"
         objectFit="cover"

@@ -17,7 +17,7 @@ const dummySiteRatings = [
   },
   { 
     name: '카카오', 
-    logo: 'https://source.unsplash.com/random/50x50?logo', 
+    logo: 'https://images.seeklogo.com/logo-png/35/1/kakaotalk-logo-png_seeklogo-355085.png?v=1957906406423334432',
     domain: 'kakao.com',
     rating: 'B',
     benefits: ['통합 로그인 기능', '서비스 연동 용이성', '보안 정책 강화'],
@@ -154,7 +154,7 @@ export default function SiteRatings() {
               <Link href={`/site-analysis/${site.domain}`} key={site.domain} className="block">
                 <div className="border p-4 rounded-lg hover:shadow-md transition-shadow">
                   <div className="flex items-center mb-2">
-                    <Image src={`/placeholder.svg?height=50&width=50&text=${site.name} Logo`} alt={`${site.name} 로고`} width={50} height={50} className="mr-4" />
+                    <Image src={`https://images.seeklogo.com/logo-png/35/1/kakaotalk-logo-png_seeklogo-355085.png?v=1957906406423334432`} alt={`${site.name} 로고`} width={50} height={50} className="mr-4" />
                     <div>
                       <h2 className="text-xl font-semibold">{site.name}</h2>
                       <p className="text-blue-600">{site.domain}</p>

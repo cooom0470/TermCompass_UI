@@ -30,7 +30,7 @@ const dummySiteData = {
   },
   'kakao.com': {
     name: '카카오',
-    logo: 'https://source.unsplash.com/random/100x100?logo',
+    logo: 'https://images.seeklogo.com/logo-png/35/1/kakaotalk-logo-png_seeklogo-355085.png?v=1957906406423334432',
     domain: 'kakao.com',
     rating: 'B',
     info: '모바일 메신저를 기반으로 한 종합 IT 플랫폼',
