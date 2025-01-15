@@ -13,13 +13,14 @@ import { useRouter } from 'next/navigation'
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [showAuthForm, setShowAuthForm] = useState(false)
   const { user, login, logout } = useUser()
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const pathname = usePathname()
   const router = useRouter()
   const { toast } = useToast()
 
   useEffect(() => {
     const businessOnlyPaths = ['/create-terms', '/modify-terms', '/business-history']
-    if (businessOnlyPaths.includes(pathname) && (!user || user.userType !== 'business')) {
+    if (!isLoggingOut && businessOnlyPaths.includes(pathname) && (!user || user.userType !== 'business')) {
       toast({
         title: "접근 제한",
         description: "이 기능은 기업 사용자 전용입니다.",
@@ -27,7 +28,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       })
       router.push('/')
     }
-  }, [pathname, user, router])
+  }, [pathname, user, router, isLoggingOut])
 
   const navItems = [
     { href: '/', label: '홈' },
@@ -55,6 +56,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     setShowAuthForm(false)
     // You can use the additionalInfo for further processing if needed
     console.log('Additional Info:', additionalInfo)
+  }
+
+  const handleLogout = () => {
+      setIsLoggingOut(true)
+      logout()
+      router.push('/')
   }
 
   return (
@@ -87,7 +94,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </nav>
           {user ? (
             <Button
-              onClick={logout}
+              onClick={handleLogout}
               variant="outline"
               className="bg-white text-blue-700 hover:bg-blue-100"
             >
