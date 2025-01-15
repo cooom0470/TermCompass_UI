@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useToast } from "@/hooks/use-toast"
+import ChatSidebar from '../components/ChatSidebar'
+import { useUser } from '../contexts/UserContext'
 
 const dummyResponses = [
   "약관의 중요성은 계약 당사자 간의 권리와 의무를 명확히 하는 데 있습니다.",
@@ -23,6 +25,7 @@ export default function AIChatbot() {
   const fileInputRef = useRef<HTMLInputElement>(null)
   //const messagesEndRef = useRef<HTMLDivElement>(null) //removed as per update 3
   const { toast } = useToast()
+  const { user } = useUser()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -59,6 +62,20 @@ export default function AIChatbot() {
     }
   }
 
+  const handleSelectChat = (chatId: number) => {
+      // In a real application, you would fetch the chat history for the selected chat
+      // For now, we'll just clear the messages if a new chat is selected
+      if (chatId === -1) {
+        setMessages([])
+      } else {
+        // Simulating loading a previous chat
+        setMessages([
+          { role: 'user', content: '이전 채팅 내용입니다.' },
+          { role: 'bot', content: '네, 이전 채팅 내용을 불러왔습니다.' }
+        ])
+      }
+  }
+
   useEffect(() => {
     const scrollArea = document.querySelector('[data-radix-scroll-area-viewport]');
     if (scrollArea) {
@@ -67,44 +84,47 @@ export default function AIChatbot() {
   }, [messages])
 
   return (
-    <Layout>
-      <div className="flex flex-col h-[calc(100vh-200px)]">
-        <h1 className="text-3xl font-bold mb-6 text-blue-800">AI 챗봇</h1>
-        <div className="flex-grow bg-white rounded-lg shadow-md flex flex-col overflow-hidden">
-          <ScrollArea className="flex-grow p-4">
-            {messages.map((message, index) => (
-              <div key={index} className={`mb-4 ${message.role === 'user' ? 'text-right' : 'text-left'}`}>
-                <span className={`inline-block p-2 rounded-lg ${message.role === 'user' ? 'bg-blue-100' : 'bg-gray-100'}`}>
-                  {message.content}
-                </span>
-              </div>
-            ))}
-          </ScrollArea>
-          <form onSubmit={handleSubmit} className="p-4 border-t">
-            <div className="flex gap-2">
-              <Input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="약관에 대해 질문하세요..."
-                className="flex-grow"
-              />
-              <Button type="submit">전송</Button>
-              <input
-                type="file"
-                accept=".pdf"
-                ref={fileInputRef}
-                onChange={handleFileUpload}
-                style={{ display: 'none' }}
-              />
-              <Button type="button" onClick={() => fileInputRef.current?.click()}>
-                PDF 업로드
-              </Button>
+      <Layout>
+        <div className="flex h-[calc(100vh-200px)]">
+          {user && <ChatSidebar onSelectChat={handleSelectChat} />}
+          <div className="flex-grow flex flex-col">
+            <h1 className="text-3xl font-bold mb-6 text-blue-800 p-4">AI 챗봇</h1>
+            <div className="flex-grow bg-white rounded-lg shadow-md flex flex-col overflow-hidden mx-4">
+              <ScrollArea className="flex-grow p-4">
+                {messages.map((message, index) => (
+                  <div key={index} className={`mb-4 ${message.role === 'user' ? 'text-right' : 'text-left'}`}>
+                    <span className={`inline-block p-2 rounded-lg ${message.role === 'user' ? 'bg-blue-100' : 'bg-gray-100'}`}>
+                      {message.content}
+                    </span>
+                  </div>
+                ))}
+              </ScrollArea>
+              <form onSubmit={handleSubmit} className="p-4 border-t">
+                <div className="flex gap-2">
+                  <Input
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    placeholder="약관에 대해 질문하세요..."
+                    className="flex-grow"
+                  />
+                  <Button type="submit">전송</Button>
+                  <input
+                    type="file"
+                    accept=".pdf"
+                    ref={fileInputRef}
+                    onChange={handleFileUpload}
+                    style={{ display: 'none' }}
+                  />
+                  <Button type="button" onClick={() => fileInputRef.current?.click()}>
+                    PDF 업로드
+                  </Button>
+                </div>
+              </form>
             </div>
-          </form>
+          </div>
         </div>
-      </div>
-    </Layout>
-  )
+      </Layout>
+    )
 }
 
