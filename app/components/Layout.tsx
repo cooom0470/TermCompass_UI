@@ -9,14 +9,28 @@ import AuthForm from './AuthForm'
 import { useUser } from '../contexts/UserContext'
 import { useToast } from "@/hooks/use-toast"
 import { useRouter } from 'next/navigation'
+import { Menu } from 'lucide-react'
+import MobileNav from './MobileNav'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [showAuthForm, setShowAuthForm] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const { user, login, logout } = useUser()
-  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
   const { toast } = useToast()
+
+  useEffect(() => {
+      const handleResize = () => {
+        setIsMobile(window.innerWidth < 768) // 768px is typically used for tablet breakpoint
+      }
+
+      handleResize() // Call once to set initial state
+      window.addEventListener('resize', handleResize)
+
+      return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   useEffect(() => {
     const businessOnlyPaths = ['/create-terms', '/modify-terms', '/business-history']
@@ -76,39 +90,45 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   height={50}
               />
           </Link>
-          <nav>
-            <ul className="flex space-x-4">
-              {navItems.map((item) => (
-                <li key={item.href}>
-                  <Link 
-                    href={item.href}
-                    className={`hover:text-blue-200 transition-colors ${
-                      pathname === item.href ? 'text-blue-200' : ''
-                    }`}
+          {isMobile ? (
+              <MobileNav navItems={navItems} user={user} onLogout={handleLogout} onLogin={() => setShowAuthForm(true)} />
+            ) : (
+              <>
+                <nav>
+                  <ul className="flex space-x-4">
+                    {navItems.map((item) => (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          className={`hover:text-blue-200 transition-colors ${
+                            pathname === item.href ? 'text-blue-200' : ''
+                          }`}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+                {user ? (
+                  <Button
+                    onClick={handleLogout}
+                    variant="outline"
+                    className="bg-white text-blue-700 hover:bg-blue-100"
                   >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          {user ? (
-            <Button
-              onClick={handleLogout}
-              variant="outline"
-              className="bg-white text-blue-700 hover:bg-blue-100"
-            >
-              로그아웃
-            </Button>
-          ) : (
-            <Button
-              onClick={() => setShowAuthForm(true)}
-              variant="outline"
-              className="bg-white text-blue-700 hover:bg-blue-100"
-            >
-              로그인 / 회원가입
-            </Button>
-          )}
+                    로그아웃
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => setShowAuthForm(true)}
+                    variant="outline"
+                    className="bg-white text-blue-700 hover:bg-blue-100"
+                  >
+                    로그인 / 회원가입
+                  </Button>
+                )}
+              </>
+            )}
         </div>
       </header>
       <main className="flex-grow container mx-auto px-4 py-8">
