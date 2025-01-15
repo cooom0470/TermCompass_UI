@@ -139,7 +139,7 @@ export default function SiteRatings() {
 
   return (
     <Layout>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto p-8">
         <h1 className="text-3xl font-bold mb-6 text-blue-800">사이트별 등급과 약관 평가</h1>
         <div className="bg-white p-6 rounded-lg shadow-md">
           <Input

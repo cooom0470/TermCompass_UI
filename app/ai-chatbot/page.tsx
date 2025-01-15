@@ -85,7 +85,7 @@ export default function AIChatbot() {
 
   return (
       <Layout>
-        <div className="flex h-[calc(100vh-200px)]">
+        <div className="flex h-[calc(100vh-200px)] p-4">
           {user && <ChatSidebar onSelectChat={handleSelectChat} />}
           <div className="flex-grow flex flex-col">
             <h1 className="text-3xl font-bold mb-6 text-blue-800 p-4">AI 챗봇</h1>

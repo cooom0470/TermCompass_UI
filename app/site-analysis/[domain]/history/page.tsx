@@ -129,7 +129,7 @@ export default function GradeHistory() {
 
   return (
     <Layout>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto p-8">
         <h1 className="text-3xl font-bold mb-6 text-blue-800">{domain} 등급 판정 이력</h1>
         <div className="bg-white p-6 rounded-lg shadow-md mb-6">
           <Table>

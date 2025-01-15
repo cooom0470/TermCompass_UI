@@ -71,7 +71,7 @@ export default function ReviewRequest() {
 
   return (
     <Layout>
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto p-8">
         <h1 className="text-3xl font-bold mb-6 text-blue-800">약관 검토 요청</h1>
         <div className="flex gap-4">
           <div className="w-1/2">
