@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Layout from '@/app/components/Layout'
-import { Input } from "@/app/components/ui/input"
+import { Input } from "@/components/ui/input"
 import Link from 'next/link'
 import Image from 'next/image'
 

@@ -2,10 +2,10 @@
 
 import { useState, useRef } from 'react'
 import Layout from '../components/Layout'
-import { Button } from "../components/ui/button"
-import { Input } from "../components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { useToast } from "@/hooks/use-toast"
-import { ScrollArea } from "../components/ui/scroll-area"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import Link from 'next/link'
 import ReviewHistory from '../components/ReviewHistory'
 import ReviewResult from '../components/ReviewResult'

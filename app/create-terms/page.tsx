@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Layout from '@/app/components/Layout'
-import { Button } from "@/app/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { useUser } from '@/app/contexts/UserContext'
 import DomainSelection from '@/app/components/DomainSelection'
 import StandardTermsForm from '@/app/components/StandardTermsForm'

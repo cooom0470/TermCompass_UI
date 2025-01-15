@@ -3,10 +3,10 @@
 import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Layout from '@/app/components/Layout'
-import { Button } from "@/app/components/ui/button"
-import { Textarea } from "@/app/components/ui/textarea"
+import { Button } from "@/components/ui/button"
+import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
-import { ScrollArea } from "@/app/components/ui/scroll-area"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 export default function ModifyTerms() {
   const [pdfContent, setPdfContent] = useState<string | null>(null)
