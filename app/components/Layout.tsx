@@ -131,16 +131,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             )}
         </div>
       </header>
-      <main className="flex-grow container mx-auto px-4 py-8">
-        {user && pathname === '/ai-chatbot' ? (
-          <div className="flex">
-            <div className="flex-grow ml-4">
-              {children}
-            </div>
-          </div>
-        ) : (
-          children
-        )}
+      <main className="flex-grow">
+        {children}
       </main>
       <footer className="bg-gray-200 text-center py-4">
         <p>&copy; 2025 약관나침반. All rights reserved.</p>
