@@ -104,7 +104,7 @@ export default function ReviewRequest() {
                         onChange={handleFileUpload}
                         style={{ display: 'none' }}
                       />
-                      <Button onClick={() => fileInputRef.current?.click()}>
+                      <Button className="bg-black text-white hover:bg-blue-600" onClick={() => fileInputRef.current?.click()}>
                         PDF 업로드
                       </Button>
                     </div>
@@ -116,7 +116,7 @@ export default function ReviewRequest() {
                         <p>{pdfContent}</p>
                       </ScrollArea>
                       <Button
-                        className="mt-4"
+                        className="mt-4 bg-black text-white hover:bg-blue-600"
                         onClick={handleReviewRequest}
                         disabled={isReviewing}
                       >
@@ -124,7 +124,7 @@ export default function ReviewRequest() {
                       </Button>
                       {isPdfUploaded && ( // Update 4
                         <Button
-                          className="mt-4"
+                          className="mt-4 bg-black text-white hover:bg-blue-600"
                           onClick={() => fileInputRef.current?.click()}
                         >
                           PDF 재업로드

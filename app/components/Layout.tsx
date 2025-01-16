@@ -136,7 +136,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           )}
         </div>
       </header>
-      <main className="flex-grow items-center justify-center overflow-hidden">
+      <main className="flex-grow items-center justify-center overflow-y-auto">
         {children}
       </main>
       <footer className="bg-gray-200 text-center py-4">

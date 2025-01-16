@@ -107,7 +107,7 @@ export default function AIChatbot() {
                     placeholder="약관에 대해 질문하세요..."
                     className="flex-grow"
                   />
-                  <Button type="submit">전송</Button>
+                  <Button className="bg-black text-white hover:bg-blue-600" type="submit">전송</Button>
                   <input
                     type="file"
                     accept=".pdf"
@@ -115,7 +115,7 @@ export default function AIChatbot() {
                     onChange={handleFileUpload}
                     style={{ display: 'none' }}
                   />
-                  <Button type="button" onClick={() => fileInputRef.current?.click()}>
+                  <Button className="bg-black text-white hover:bg-blue-600" type="button" onClick={() => fileInputRef.current?.click()}>
                     PDF 업로드
                   </Button>
                 </div>

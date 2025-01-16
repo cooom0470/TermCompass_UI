@@ -57,7 +57,7 @@ export default function TermsAgreement({ onAgree, onCancel }: TermsAgreementProp
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline" onClick={onCancel}>취소</Button>
-        <Button onClick={handleAgree} disabled={!termsAgreed || !privacyAgreed}>동의</Button>
+        <Button className="bg-black text-white hover:bg-blue-600" onClick={handleAgree} disabled={!termsAgreed || !privacyAgreed}>동의</Button>
       </CardFooter>
     </Card>
   )

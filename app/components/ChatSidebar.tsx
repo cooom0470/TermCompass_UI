@@ -32,8 +32,8 @@ export default function ChatSidebar({ onSelectChat }: ChatSidebarProps) {
   }
 
   return (
-      <div className="w-64 bg-gray-100 p-4 h-full">
-        <Button className="w-full mb-4" onClick={handleNewChat}>새 채팅</Button>
+      <div className="w-64 bg-gray-100 p-4 h-full ">
+        <Button className="w-full mb-4 bg-black text-white hover:bg-blue-600" onClick={handleNewChat}>새 채팅</Button>
         <ScrollArea className="h-[calc(100vh-200px)]">
           {dummyChatHistory.map((chat) => (
             <div

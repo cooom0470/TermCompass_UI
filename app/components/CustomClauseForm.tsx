@@ -6,10 +6,11 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 interface CustomClauseFormProps {
   onAdd: (clause: string) => void
   onFinish: () => void
+  onBack: () => void
   clauses: string[]
 }
 
-export default function CustomClauseForm({ onAdd, onFinish, clauses }: CustomClauseFormProps) {
+export default function CustomClauseForm({ onAdd, onFinish, onBack, clauses }: CustomClauseFormProps) {
   const [newClause, setNewClause] = useState('')
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -31,7 +32,7 @@ export default function CustomClauseForm({ onAdd, onFinish, clauses }: CustomCla
             placeholder="추가할 조항을 입력하세요..."
             className="flex-grow"
           />
-          <Button type="submit">추가</Button>
+          <Button type="submit" className="bg-black text-white hover:bg-blue-600">추가</Button>
         </div>
       </form>
       <ScrollArea className="h-[200px] border p-4 rounded mb-4">
@@ -41,7 +42,10 @@ export default function CustomClauseForm({ onAdd, onFinish, clauses }: CustomCla
           </div>
         ))}
       </ScrollArea>
-      <Button onClick={onFinish}>완료</Button>
+      <div className="flex justify-between">
+        <Button type="button" className="bg-black text-white hover:bg-blue-600" onClick={onBack}>이전</Button>
+        <Button type="submit" className="bg-black text-white hover:bg-blue-600" onClick={onFinish}>완료</Button>
+      </div>
     </div>
   )
 }

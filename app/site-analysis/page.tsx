@@ -1,10 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import Layout from '@/app/components/Layout'
+import Layout from '../components/Layout'
 import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 import Link from 'next/link'
 import Image from 'next/image'
+import { Badge } from "@/components/ui/badge"
 
 const dummySiteRatings = [
   { 
@@ -17,7 +19,7 @@ const dummySiteRatings = [
   },
   { 
     name: '카카오', 
-    logo: 'https://images.seeklogo.com/logo-png/35/1/kakaotalk-logo-png_seeklogo-355085.png?v=1957906406423334432',
+    logo: 'https://source.unsplash.com/random/50x50?logo', 
     domain: 'kakao.com',
     rating: 'B',
     benefits: ['통합 로그인 기능', '서비스 연동 용이성', '보안 정책 강화'],
@@ -129,60 +131,89 @@ const dummySiteRatings = [
   }
 ]
 
+type Grade = 'A' | 'B' | 'C' | 'ALL';
+
 export default function SiteRatings() {
   const [searchTerm, setSearchTerm] = useState('')
+  const [selectedGrade, setSelectedGrade] = useState<Grade>('ALL')
 
   const filteredRatings = dummySiteRatings.filter(rating =>
-    rating.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    rating.domain.toLowerCase().includes(searchTerm.toLowerCase())
+    (selectedGrade === 'ALL' || rating.rating === selectedGrade) &&
+    (rating.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    rating.domain.toLowerCase().includes(searchTerm.toLowerCase()))
+  )
+
+  const renderSiteCard = (site: typeof dummySiteRatings[0]) => (
+    <Link href={`/site-analysis/${site.domain}`} key={site.domain} className="block">
+      <div className="border p-4 rounded-lg hover:shadow-md transition-shadow">
+        <div className="flex items-center mb-2">
+          <Image src={`/placeholder.svg?height=50&width=50&text=${site.name} Logo`} alt={`${site.name} 로고`} width={50} height={50} className="mr-4" />
+          <div>
+            <h2 className="text-xl font-semibold">{site.name}</h2>
+            <p className="text-blue-600">{site.domain}</p>
+          </div>
+          <Badge variant="outline" className="ml-auto text-lg font-bold">{site.rating}</Badge>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <h3 className="font-semibold text-green-600">주요 장점</h3>
+            <ul className="list-disc list-inside">
+              {site.benefits.map((benefit, index) => (
+                <li key={index}>{benefit}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold text-red-600">주요 단점</h3>
+            <ul className="list-disc list-inside">
+              {site.drawbacks.map((drawback, index) => (
+                <li key={index}>{drawback}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </Link>
   )
 
   return (
     <Layout>
-      <div className="max-w-7xl mx-auto p-8">
+      <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-6 text-blue-800">사이트별 등급과 약관 평가</h1>
         <div className="bg-white p-6 rounded-lg shadow-md">
-          <Input
-            type="text"
-            placeholder="사이트 검색..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="mb-4"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-            {filteredRatings.map((site) => (
-              <Link href={`/site-analysis/${site.domain}`} key={site.domain} className="block">
-                <div className="border p-4 rounded-lg hover:shadow-md transition-shadow h-full">
-                  <div className="flex items-center mb-2">
-                    <Image src={`/placeholder.svg?height=50&width=50&text=${site.name} Logo`} alt={`${site.name} 로고`} width={50} height={50} className="mr-4" />
-                    <div>
-                      <h2 className="text-xl font-semibold">{site.name}</h2>
-                      <p className="text-blue-600">{site.domain}</p>
-                    </div>
-                    <span className="ml-auto text-2xl font-bold">{site.rating}</span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <h3 className="font-semibold text-green-600">주요 장점</h3>
-                      <ul className="list-disc list-inside">
-                        {site.benefits.map((benefit, index) => (
-                          <li key={index}>{benefit}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-red-600">주요 단점</h3>
-                      <ul className="list-disc list-inside">
-                        {site.drawbacks.map((drawback, index) => (
-                          <li key={index}>{drawback}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
+          <div className="flex flex-col md:flex-row justify-between items-center mb-4 space-y-4 md:space-y-0">
+            <div className="flex flex-wrap justify-center md:justify-start gap-2">
+              {(['ALL', 'A', 'B', 'C'] as const).map((grade) => (
+                <Button
+                  key={grade}
+                  variant={selectedGrade === grade ? "default" : "outline"}
+                  onClick={() => setSelectedGrade(grade)}
+                  className={`px-4 py-2 rounded-full ${
+                    selectedGrade === grade
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-white text-blue-500 border-blue-500'
+                  }`}
+                >
+                  {grade === 'ALL' ? '전체' : `${grade}등급`}
+                </Button>
+              ))}
+            </div>
+            <Input
+              type="text"
+              placeholder="사이트 검색..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full md:w-64"
+            />
           </div>
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {filteredRatings.map(renderSiteCard)}
+            </div>
+          </div>
+          {filteredRatings.length === 0 && (
+            <p className="text-center text-gray-500 mt-4">검색 결과가 없습니다.</p>
+          )}
         </div>
       </div>
     </Layout>

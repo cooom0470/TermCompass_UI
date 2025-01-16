@@ -391,7 +391,7 @@ export default function SiteEvaluation() {
           </div>
         </div>
 
-        <Button onClick={() => router.push(`/site-analysis/${domain}/history`)}>
+        <Button className="bg-black text-white hover:bg-blue-600" onClick={() => router.push(`/site-analysis/${domain}/history`)}>
           등급 판정 이력 보기
         </Button>
       </div>

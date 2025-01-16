@@ -167,7 +167,7 @@ export default function AuthForm({ onSubmit, onCancel }: AuthFormProps) {
           </div>
         </CardContent>
         <CardFooter className="flex flex-col">
-          <Button className="w-full" type="submit">
+          <Button className="w-full bg-black text-white hover:bg-blue-600" type="submit">
             {isLogin ? '로그인' : '회원가입'}
           </Button>
           <Button

@@ -46,23 +46,37 @@ export default function CreateTerms() {
     router.push(`/create-terms/review-result?domain=${encodeURIComponent(selectedDomain || '')}&terms=${encodeURIComponent(standardTerms)}&clauses=${encodeURIComponent(JSON.stringify(customClauses))}`)
   }
 
+  const handleback = () => {
+    setStep(1)
+    setSelectedDomain(null)
+  }
+  
   return (
     <Layout>
       <div className="max-w-4xl mx-auto p-8">
         <h1 className="text-3xl font-bold mb-6 text-blue-800">약관 생성</h1>
         {step === 1 && <DomainSelection onSelect={handleDomainSelect} />}
-        {step === 2 && <StandardTermsForm domain={selectedDomain!} onSubmit={handleStandardTermsSubmit} />}
+        {step === 2 && (
+          <StandardTermsForm 
+            domain={selectedDomain!} 
+            onSubmit={handleStandardTermsSubmit} 
+            onBack={handleback}
+          />
+        )}
         {step === 3 && (
           <CustomClauseForm 
             onAdd={handleCustomClauseAdd} 
             onFinish={handleCustomClauseFinish}
+            onBack={() => setStep(2)}
             clauses={customClauses}
+            
           />
         )}
         {step === 4 && (
           <TermsReview 
             standardTerms={standardTerms} 
             customClauses={customClauses} 
+            onBack={() => setStep(3)}
             onReviewRequest={handleReviewRequest}
           />
         )}

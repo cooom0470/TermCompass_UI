@@ -5,9 +5,10 @@ import { Textarea } from "@/components/ui/textarea"
 interface StandardTermsFormProps {
   domain: string
   onSubmit: (terms: string) => void
+  onBack: () => void
 }
 
-export default function StandardTermsForm({ domain, onSubmit }: StandardTermsFormProps) {
+export default function StandardTermsForm({ domain, onSubmit, onBack }: StandardTermsFormProps) {
   const [terms, setTerms] = useState(getStandardTerms(domain))
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -23,7 +24,10 @@ export default function StandardTermsForm({ domain, onSubmit }: StandardTermsFor
         onChange={(e) => setTerms(e.target.value)}
         className="h-[400px] mb-4"
       />
-      <Button type="submit">확인</Button>
+      <div className="flex justify-between">
+        <Button className="bg-black text-white hover:bg-blue-600 hover:text-white" variant="outline" onClick={onBack}>이전</Button>
+        <Button type="submit" className="bg-black text-white hover:bg-blue-600">다음</Button>
+      </div>
     </form>
   )
 }

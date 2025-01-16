@@ -89,7 +89,7 @@ export default function ModifyTerms() {
               onChange={handleFileUpload}
               style={{ display: 'none' }}
             />
-            <Button onClick={() => fileInputRef.current?.click()}>
+            <Button className="bg-black text-white hover:bg-blue-600" onClick={() => fileInputRef.current?.click()}>
               PDF 업로드
             </Button>
           </div>
@@ -112,7 +112,7 @@ export default function ModifyTerms() {
           </div>
           <Button 
             onClick={handleModificationRequest} 
-            className="mb-4"
+            className="mb-4 bg-black text-white hover:bg-blue-600"
             disabled={isModifying}
           >
             {isModifying ? '수정 중...' : '수정 적용'}
@@ -126,7 +126,7 @@ export default function ModifyTerms() {
             </div>
           )}
           {modifiedContent && (
-            <Button onClick={handleReviewRequest}>검토 요청</Button>
+            <Button className="bg-black text-white hover:bg-blue-600" onClick={handleReviewRequest}>검토 요청</Button>
           )}
         </div>
       </div>
