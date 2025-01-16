@@ -79,59 +79,64 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="h-screen w-screen flex flex-col bg-gray-50">
       <header className="bg-gray-500 text-white shadow-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold">
-              <Image
-                  src={`/TermCompass_logo.png`}
-                  alt={'logo'}
-                  width={50}
-                  height={50}
-              />
+            <Image
+              src={`/TermCompass_logo.png`}
+              alt={'logo'}
+              width={50}
+              height={50}
+            />
           </Link>
           {isMobile ? (
-              <MobileNav navItems={navItems} user={user} onLogout={handleLogout} onLogin={() => setShowAuthForm(true)} />
-            ) : (
-              <>
-                <nav>
-                  <ul className="flex space-x-4">
-                    {navItems.map((item) => (
-                      <li key={item.href}>
-                        <Link
-                          href={item.href}
-                          className={`hover:text-blue-200 transition-colors ${
-                            pathname === item.href ? 'text-blue-200' : ''
-                          }`}
-                        >
-                          {item.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-                {user ? (
-                  <Button
-                    onClick={handleLogout}
-                    variant="outline"
-                    className="bg-white text-blue-700 hover:bg-blue-100"
-                  >
-                    로그아웃
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={() => setShowAuthForm(true)}
-                    variant="outline"
-                    className="bg-white text-blue-700 hover:bg-blue-100"
-                  >
-                    로그인 / 회원가입
-                  </Button>
-                )}
-              </>
-            )}
+            <MobileNav
+              navItems={navItems}
+              user={user}
+              onLogout={handleLogout}
+              onLogin={() => setShowAuthForm(true)}
+            />
+          ) : (
+            <>
+              <nav>
+                <ul className="flex space-x-4">
+                  {navItems.map((item) => (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className={`hover:text-blue-200 transition-colors ${
+                          pathname === item.href ? 'text-blue-200' : ''
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+              {user ? (
+                <Button
+                  onClick={handleLogout}
+                  variant="outline"
+                  className="bg-white text-blue-700 hover:bg-blue-100"
+                >
+                  로그아웃
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => setShowAuthForm(true)}
+                  variant="outline"
+                  className="bg-white text-blue-700 hover:bg-blue-100"
+                >
+                  로그인 / 회원가입
+                </Button>
+              )}
+            </>
+          )}
         </div>
       </header>
-      <main className="flex-grow">
+      <main className="flex-grow items-center justify-center overflow-hidden">
         {children}
       </main>
       <footer className="bg-gray-200 text-center py-4">
@@ -139,8 +144,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </footer>
       {showAuthForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <AuthForm 
-            onSubmit={handleAuthSubmit} 
+          <AuthForm
+            onSubmit={handleAuthSubmit}
             onCancel={() => setShowAuthForm(false)}
           />
         </div>
@@ -148,4 +153,3 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     </div>
   )
 }
-

@@ -10,7 +10,7 @@ export default function HeroSection() {
         objectFit="cover"
         className="z-0"
       />
-      <div className="z-10 text-center bg-white bg-opacity-50 p-8 rounded-lg">
+      <div className="z-10 text-center bg-white bg-opacity-50 p-8 rounded-lg mb-20">
         <h1 className="text-4xl font-bold mb-4">약관의 미래, 약관나침반과 함께</h1>
         <p className="text-xl">AI 기반 약관 분석으로 더 나은 디지털 경험을 만듭니다</p>
       </div>
