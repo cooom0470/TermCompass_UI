@@ -8,6 +8,7 @@ import ServicesSection from './components/ServicesSection'
 import NoticeBoard from './components/NoticeBoard'
 import PhotoNews from './components/PhotoNews'
 import SectionNavigation from './components/SectionNavigation'
+import NewsAndNoticeSection from './components/NewsAndNoticeSection'
 
 export default function Home() {
     const scrollContainerRef = useRef<HTMLDivElement>(null)
@@ -71,11 +72,8 @@ export default function Home() {
         <div className="snap-start h-screen">
           <ServicesSection />
         </div>
-        <div className="snap-start h-screen flex justify-center items-center">
-            <div className="flex flex-row justify-center items-center w-full gap-32">
-              <NoticeBoard className="w-1/2 p-4" />
-              <PhotoNews className="w-1/2 p-4" />
-            </div>
+        <div className="snap-start h-screen">
+          <NewsAndNoticeSection />
         </div>
       </div>
       <SectionNavigation activeSection={activeSection} onNavigate={scrollToSection} />
