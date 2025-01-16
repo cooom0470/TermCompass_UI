@@ -88,8 +88,8 @@ export default function AIChatbot() {
         <div className="flex h-[calc(100vh-200px)] p-4">
           {user && <ChatSidebar onSelectChat={handleSelectChat} />}
           <div className="flex-grow flex flex-col">
-            <h1 className="text-3xl font-bold mb-6 text-blue-800 p-4">AI 챗봇</h1>
-            <div className="flex-grow bg-white rounded-lg shadow-md flex flex-col overflow-hidden mx-4">
+            <h1 className="text-3xl font-bold mb-6 ml-20 text-blue-800 p-4">AI 챗봇</h1>
+            <div className="flex-grow bg-white rounded-lg shadow-md flex flex-col overflow-hidden mx-20">
               <ScrollArea className="flex-grow p-4">
                 {messages.map((message, index) => (
                   <div key={index} className={`mb-4 ${message.role === 'user' ? 'text-right' : 'text-left'}`}>
