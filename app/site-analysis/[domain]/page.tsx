@@ -350,7 +350,7 @@ export default function SiteEvaluation() {
 
   return (
     <Layout>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto p-8">
         <h1 className="text-3xl font-bold mb-6 text-blue-800">{site.name} 약관 평가</h1>
         <div className="bg-white p-6 rounded-lg shadow-md mb-6">
           <div className="flex items-center mb-4">

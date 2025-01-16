@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
@@ -33,30 +33,28 @@ export default function PhotoNews() {
   }
 
   return (
-    <section className="py-12">
-      <h2 className="text-3xl font-bold text-center mb-8">포토 뉴스</h2>
-      <div className="relative max-w-md mx-auto">
-        <Card>
-          <CardContent className="p-0">
-            <Image
-              src={`/placeholder.svg?height=200&width=300&text=${newsItems[currentIndex].title}`}
-              alt={newsItems[currentIndex].title}
-              width={300}
-              height={200}
-              layout="responsive"
-            />
-            <div className="p-4">
-              <h3 className="text-lg font-semibold">{newsItems[currentIndex].title}</h3>
-            </div>
-          </CardContent>
-        </Card>
+    <section className="py-12 relative">
+         <h2 className="text-3xl font-bold mb-6 text-center">카드 뉴스</h2>
+         <Card>
+            <CardHeader>
+              <Image
+                src={newsItems[currentIndex].image || "/placeholder.svg"}
+                alt={newsItems[currentIndex].title}
+                width={300}
+                height={200}
+                className="rounded-t-lg"
+              />
+            </CardHeader>
+            <CardContent>
+              <CardTitle className="truncate text-center">{newsItems[currentIndex].title}</CardTitle>
+            </CardContent>
+         </Card>
         <Button variant="outline" className="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-full" onClick={prevSlide}>
           <ChevronLeft className="h-4 w-4" />
         </Button>
         <Button variant="outline" className="absolute top-1/2 right-0 transform -translate-y-1/2 translate-x-full" onClick={nextSlide}>
           <ChevronRight className="h-4 w-4" />
         </Button>
-      </div>
     </section>
   )
 }

@@ -24,27 +24,26 @@ const notices = {
 export default function NoticeBoard() {
   return (
     <section className="py-12">
-      <h2 className="text-3xl font-bold text-center mb-8">공지사항</h2>
-      <Tabs defaultValue="government" className="w-full max-w-3xl mx-auto">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="government">정부 공지</TabsTrigger>
-          <TabsTrigger value="agency">진흥원 공지</TabsTrigger>
-          <TabsTrigger value="site">사이트 공지</TabsTrigger>
-        </TabsList>
-        {Object.entries(notices).map(([key, items]) => (
-          <TabsContent key={key} value={key}>
-            <ul className="space-y-2">
-              {items.map((item, index) => (
-                <li key={index} className="flex justify-between items-center border-b pb-2">
-                  <span>{item.title}</span>
-                  <span className="text-sm text-gray-500">{item.date}</span>
-                </li>
-              ))}
-            </ul>
-          </TabsContent>
-        ))}
-      </Tabs>
+      <h2 className="text-3xl font-bold mb-6 text-center">공지사항</h2>
+          <Tabs defaultValue="government" className="w-full">
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="government">정부 공지</TabsTrigger>
+              <TabsTrigger value="agency">진흥원 공지</TabsTrigger>
+              <TabsTrigger value="site">사이트 공지</TabsTrigger>
+            </TabsList>
+            {Object.entries(notices).map(([key, items]) => (
+              <TabsContent key={key} value={key}>
+                <ul className="space-y-2">
+                  {items.map((item, index) => (
+                    <li key={index} className="flex justify-between items-center border-b pb-2">
+                      <span>{item.title}</span>
+                      <span className="text-sm text-gray-500">{item.date}</span>
+                    </li>
+                  ))}
+                </ul>
+              </TabsContent>
+            ))}
+          </Tabs>
     </section>
   )
 }
-

@@ -5,11 +5,12 @@ import { Badge } from "@/components/ui/badge"
 interface ReviewResultProps {
   result: string | null
   clauseDetails: { [key: string]: string }
+  isExistingReview?: boolean
 }
 
-export default function ReviewResult({ result, clauseDetails }: ReviewResultProps) {
+export default function ReviewResult({ result, clauseDetails, isExistingReview = false }: ReviewResultProps) {
   const [selectedClause, setSelectedClause] = useState<string | null>(null)
-  const grade = result ? 'B' : null // This would be determined by the AI model in a real implementation
+  const grade = result ? 'B' : null
 
   const handleClauseClick = useCallback((clause: string) => {
     setSelectedClause(clause)
@@ -24,16 +25,18 @@ export default function ReviewResult({ result, clauseDetails }: ReviewResultProp
   }, [result]);
 
   return (
-    <div>
+    <div className="h-full flex flex-col p-8">
       <h2 className="text-xl font-semibold mb-2">검토 결과</h2>
       {result ? (
-        <div>
-          <div className="mb-2">
-            <span className="font-semibold mr-2">등급:</span>
-            <Badge variant="outline">{grade}</Badge>
-          </div>
-          <ScrollArea className="h-[300px] border p-4 rounded">
-            <p 
+        <div className="flex-grow flex flex-col">
+          {!isExistingReview && (
+            <div className="mb-2">
+              <span className="font-semibold mr-2">등급:</span>
+              <Badge variant="outline">{grade}</Badge>
+            </div>
+          )}
+          <ScrollArea className="flex-grow border p-4 rounded mb-4">
+            <p
               dangerouslySetInnerHTML={{ __html: renderResult() || '' }}
               onClick={(e) => {
                 const target = e.target as HTMLElement;
@@ -43,11 +46,11 @@ export default function ReviewResult({ result, clauseDetails }: ReviewResultProp
               }}
             />
           </ScrollArea>
-          <p className="mt-2 text-sm text-gray-500">
+          <p className="text-sm text-gray-500 mb-2">
             독소조항을 클릭하면 상세 정보를 확인할 수 있습니다.
           </p>
           {selectedClause && clauseDetails[selectedClause] && (
-            <div className="mt-4 p-4 border rounded">
+            <div className="border rounded p-4">
               <h3 className="font-semibold mb-2">선택된 조항 상세 정보:</h3>
               <p className="font-medium">{selectedClause}</p>
               <p className="mt-2 text-sm text-gray-600">
@@ -57,9 +60,8 @@ export default function ReviewResult({ result, clauseDetails }: ReviewResultProp
           )}
         </div>
       ) : (
-        <p>검토 결과가 여기에 표시됩니다.</p>
+        <p>{isExistingReview ? "검토 결과를 불러오는 중..." : "검토 결과가 여기에 표시됩니다."}</p>
       )}
     </div>
   )
 }
-

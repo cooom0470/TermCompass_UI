@@ -78,7 +78,7 @@ export default function ModifyTerms() {
 
   return (
     <Layout>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto p-8">
         <h1 className="text-3xl font-bold mb-6 text-blue-800">약관 수정 및 저장</h1>
         <div className="bg-white p-6 rounded-lg shadow-md">
           <div className="mb-4">

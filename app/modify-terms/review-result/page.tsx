@@ -37,7 +37,7 @@ export default function ReviewResult() {
   if (!reviewResult) {
     return (
       <Layout>
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center p-8">
           <h1 className="text-3xl font-bold mb-6 text-blue-800">AI 모델 검토 중...</h1>
           <p>수정된 약관을 분석하고 있습니다. 잠시만 기다려주세요.</p>
         </div>
@@ -47,7 +47,7 @@ export default function ReviewResult() {
 
   return (
     <Layout>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto p-8">
         <h1 className="text-3xl font-bold mb-6 text-blue-800">AI 모델 검토 결과</h1>
         <Card className="mb-6">
           <CardHeader>
