@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 
-const topWebsites = [
+export const topWebsites = [
   {
     name: '네이버',
     benefits: ['개인정보 보호 강화', '서비스 이용 편의성', '콘텐츠 권리 보장'],
