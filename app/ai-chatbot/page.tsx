@@ -23,7 +23,6 @@ export default function AIChatbot() {
   const [messages, setMessages] = useState<{role: 'user' | 'bot', content: string}[]>([])
   const [input, setInput] = useState('')
   const fileInputRef = useRef<HTMLInputElement>(null)
-  //const messagesEndRef = useRef<HTMLDivElement>(null) //removed as per update 3
   const { toast } = useToast()
   const { user } = useUser()
 
