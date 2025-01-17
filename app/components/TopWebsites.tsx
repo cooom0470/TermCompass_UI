@@ -21,18 +21,17 @@ export const topWebsites = [
     link: '/site-analysis/coupang.com'
   },
   {
-    name: '쿠ddfdsfsd팡',
-    benefits: ['반품 정책', '배송 서비스', '회원 혜택'],
-    drawbacks: ['개인정보 활용 범위', '분쟁 해결 절차', '가격 정책 변경'],
-    link: '/site-analysis/coupang.com'
+      name: '배달의민족',
+      benefits: ['주문 취소 및 환불 정책', '고객 리뷰 시스템', '개인정보 보호 정책'],
+      drawbacks: ['가격 정책 변경 권한', '배달 지연에 대한 책임 제한', '분쟁 해결 절차'],
+      link: 'baemin.com',
   },
   {
-    name: '쿠sdfsd팡',
-    benefits: ['반품 정책', '배송 서비스', '회원 혜택'],
-    drawbacks: ['개인정보 활용 범위', '분쟁 해결 절차', '가격 정책 변경'],
-    link: '/site-analysis/coupang.com'
-  }
-  ,
+      name: '당근마켓',
+      benefits: ['지역 기반 거래 시스템', '사용자 간 직거래 지원', '간편한 판매글 등록'],
+      drawbacks: ['거래 사기 책임 제한', '개인정보 노출 위험', '분쟁 중재 한계'],
+      domain: 'daangn.com',
+  },
   {
     name: '쿠sdfsd팡',
     benefits: ['반품 정책', '배송 서비스', '회원 혜택'],

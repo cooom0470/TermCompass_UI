@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Shield, Search, FileText, Bot } from 'lucide-react'
 import TopWebsites from "@/app/components/TopWebsites";
-import {topWebsites} from "@/app/components/TopWebsites";
+import { topWebsites } from "@/app/components/TopWebsites";
 import { useState } from "react";
 
 const services = [
@@ -48,7 +48,7 @@ export default function ServicesSection() {
     <section className="h-full py-16 bg-gray-100 flex items-center">
       <div className="container mx-auto px-4">
         <h1 className="text-3xl font-bold text-center mb-8">
-          사이트들의 약관의 평가를 한눈에!!
+          사이트들의 약관의 평가를 한눈에!
           <div className="py-12">
             <div className="relative overflow-hidden">
               {/* 슬라이드 컨테이너 */}
@@ -61,7 +61,7 @@ export default function ServicesSection() {
                 {topWebsites.map((website, index) => (
                     <div
                         key={index}
-                        className="w-1/3 flex-shrink-0 p-4 border rounded-lg shadow-md"
+                        className="w-1/3 flex-shrink-0 p-4 pl-12 border rounded-lg shadow-md"
 
                     >
                       <div className="flex flex-col md:flex-row items-center justify-between gap-8 px-4 mb-4">
@@ -78,14 +78,14 @@ export default function ServicesSection() {
 
                       </div>
 
-                      <h4 className="text-3xl text-left ml-5 font-semibold text-green-600 ">장점</h4>
-                      <ul className="text-xl text-left ml-9 list-disc list-inside text-gray-700">
+                      <h4 className="text-xl text-left ml-5 font-semibold text-green-600 ">장점</h4>
+                      <ul className="text-base text-left ml-9 list-disc list-inside text-gray-700">
                         {website.benefits.map((benefit, i) => (
                             <li key={i}>{benefit}</li>
                         ))}
                       </ul>
-                      <h4 className="text-3xl text-left ml-5 font-semibold text-red-600 mt-4">단점</h4>
-                      <ul className="text-xl text-left ml-9 list-disc list-inside text-gray-700">
+                      <h4 className="text-xl text-left ml-5 font-semibold text-red-600 mt-4">단점</h4>
+                      <ul className="text-base text-left ml-9 list-disc list-inside text-gray-700">
                       {website.drawbacks.map((drawback, i) => (
                             <li key={i}>{drawback}</li>
                         ))}
@@ -95,24 +95,23 @@ export default function ServicesSection() {
               </div>
               <button
                   onClick={prevSlide}
-                  className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
+                  className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-500 text-white p-2 rounded-full"
               >
                 &lt;
               </button>
               <button
                   onClick={nextSlide}
-                  className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
+                  className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-500 text-white p-2 rounded-full"
               >
                 &gt;
               </button>
-
             </div>
           </div>
         </h1>
         <h2 className="text-3xl font-bold text-center mb-8">약관나침반 서비스</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {services.map((service, index) => (
-              <Card key={index}>
+              <Card key={index} className="mb-20">
                 <CardHeader>
                   <service.icon className="w-12 h-12 mb-4 text-blue-600"/>
                   <CardTitle>{service.title}</CardTitle>
