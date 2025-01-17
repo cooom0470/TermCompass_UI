@@ -18,13 +18,13 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="relative h-screen flex items-center justify-center text-gray">
+    <section className="relative min-h-[calc(100vh-8rem)] h-screen flex items-center justify-center text-gray">
         <div className="relative w-screen h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 text-white">
           <div className="z-10 text-center mb-20">
-            <h1 className="text-5xl font-bold mb-4">
+            <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4">
               약관의 미래, 약관나침반과 함께
             </h1>
-            <p className="text-2xl mb-8">
+            <p className="text-sm sm:text-xl md:text-2xl mb-4 sm:mb-6">
               AI 기반
               <motion.span
                 key={currentWord}
