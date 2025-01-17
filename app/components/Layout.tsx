@@ -49,7 +49,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { href: '/ai-chatbot', label: 'AI 챗봇' },
     { href: '/site-analysis', label: '사이트 등급' },
     { href: '/review-request', label: '약관 검토' },
-    ...(user
+    { href: '/review-request', label: '게시판' },
+
+      ...(user
       ? user.userType === 'business'
         ? [
             { href: '/create-terms', label: '약관 생성' },
