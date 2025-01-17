@@ -354,7 +354,7 @@ export default function SiteEvaluation() {
         <h1 className="text-3xl font-bold mb-6 text-blue-800">{site.name} 약관 평가</h1>
         <div className="bg-white p-6 rounded-lg shadow-md mb-6">
           <div className="flex items-center mb-4">
-            <Image src={`/placeholder.svg?height=100&width=100&text=${site.name} Logo`} alt={`${site.name} 로고`} width={100} height={100} className="mr-4" />
+            <Image src={`/TermCompass_logo.png`} alt={`${site.name} 로고`} width={100} height={100} className="mr-4" />
             <div>
               <h2 className="text-2xl font-semibold">{site.name}</h2>
               <p className="text-blue-600">{site.domain}</p>

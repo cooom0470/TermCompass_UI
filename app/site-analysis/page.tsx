@@ -147,7 +147,7 @@ export default function SiteRatings() {
     <Link href={`/site-analysis/${site.domain}`} key={site.domain} className="block">
       <div className="border p-4 rounded-lg hover:shadow-md transition-shadow">
         <div className="flex items-center mb-2">
-          <Image src={`/placeholder.svg?height=50&width=50&text=${site.name} Logo`} alt={`${site.name} 로고`} width={50} height={50} className="mr-4" />
+          <Image src={`/TermCompass_logo.png`} alt={`${site.name} 로고`} width={50} height={50} className="mr-4" />
           <div>
             <h2 className="text-xl font-semibold">{site.name}</h2>
             <p className="text-blue-600">{site.domain}</p>

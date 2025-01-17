@@ -24,10 +24,10 @@ const notices = {
 }
 
 const newsItems = [
-  { title: '인공지능 기반 약관 분석 서비스 출시', image: 'https://source.unsplash.com/random/800x600?ai-analysis' },
-  { title: '소비자 권익 보호를 위한 새로운 법안 발의', image: 'https://source.unsplash.com/random/800x600?consumer-rights' },
-  { title: '온라인 플랫폼 기업들의 약관 개선 노력', image: 'https://source.unsplash.com/random/800x600?online-platform' },
-  { title: '데이터 3법 시행 1년, 그 영향과 전망', image: 'https://source.unsplash.com/random/800x600?data-law' },
+  { title: '인공지능 기반 약관 분석 서비스 출시', image: '/herobackground.jpg' },
+  { title: '소비자 권익 보호를 위한 새로운 법안 발의', image: '/herobackground.jpg' },
+  { title: '온라인 플랫폼 기업들의 약관 개선 노력', image: '/herobackground.jpg' },
+  { title: '데이터 3법 시행 1년, 그 영향과 전망', image: '/herobackground.jpg' },
 ]
 
 export default function NewsAndNoticeSection() {
@@ -77,12 +77,12 @@ export default function NewsAndNoticeSection() {
           </div>
           <div className="relative">
             <h2 className="text-3xl font-bold mb-6 text-center">포토 뉴스</h2>
-            <Card>
-              <CardHeader>
+            <Card className="flex flex-col items-center justify-center h-auto mx-auto p-4 shadow-lg rounded-lg">
+              <CardHeader className="w-full flex items-center justify-center">
                 <Image
                   src={newsItems[currentIndex].image || "/placeholder.svg"}
                   alt={newsItems[currentIndex].title}
-                  width={300}
+                  width={400}
                   height={200}
                   className="rounded-t-lg"
                 />
