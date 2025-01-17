@@ -20,7 +20,7 @@ export default function HeroSection() {
   return (
     <section className="relative h-screen flex items-center justify-center text-gray">
         <div className="relative w-screen h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 text-white">
-          <div className="z-10 text-center">
+          <div className="z-10 text-center mb-20">
             <h1 className="text-5xl font-bold mb-4">
               약관의 미래, 약관나침반과 함께
             </h1>

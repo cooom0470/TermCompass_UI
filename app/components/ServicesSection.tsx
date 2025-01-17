@@ -29,13 +29,13 @@ export default function ServicesSection() {
   return (
     <section className="h-full py-16 bg-gray-100 flex items-center">
       <div className="container mx-auto px-4">
-        <h1 className="text-3xl font-bold text-center mb-8">
+        <h1 className="text-3xl font-bold text-center mb-20">
           사이트들의 약관을 한번에 평가하세요!!
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
             {topWebsites.map((website, index) => (
                 <div key={index} className="p-4 border rounded-lg shadow-md">
                   <h3 className="text-xl font-bold mb-2">{website.name}</h3>
-                  <div className="">
+                  <div className="mb-4">
                     <h4 className="text-xl font-semibold text-green-600 text-left ml-10 ">장점</h4>
                     <ul className="list-disc list-inside text-gray-700 text-base text-left ml-10">
                       {website.benefits.map((benefit, i) => (
@@ -43,7 +43,7 @@ export default function ServicesSection() {
                       ))}
                     </ul>
                   </div>
-                  <div className="mb-2">
+                  <div className="mb-4">
                     <h4 className="text-xl font-semibold text-red-600 text-left ml-10">단점</h4>
                     <ul className="list-disc list-inside text-gray-700 text-gray-700 text-base text-left ml-10">
                       {website.drawbacks.map((drawback, i) => (
@@ -53,18 +53,18 @@ export default function ServicesSection() {
                   </div>
                   <a
                       href={website.link}
-                      className="text-blue-500 hover:underline "
+                      className="inline-block bg-blue-500 text-white text-sm font-semibold py-1 px-3 rounded hover:bg-blue-600 transition duration-200"
                   >
-                    사이트 분석 보기
+                    사이트 분석
                   </a>
                 </div>
             ))}
           </div>
         </h1>
         <h2 className="text-3xl font-bold text-center mb-8">약관나침반 서비스</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {services.map((service, index) => (
-              <Card key={index}>
+              <Card key={index} className="mb-20">
                 <CardHeader>
                   <service.icon className="w-12 h-12 mb-4 text-blue-600"/>
                   <CardTitle>{service.title}</CardTitle>

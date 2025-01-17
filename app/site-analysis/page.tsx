@@ -178,8 +178,8 @@ export default function SiteRatings() {
 
   return (
     <Layout>
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6 text-blue-800">사이트별 등급과 약관 평가</h1>
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-3xl font-bold text-blue-800 p-8">사이트별 등급과 약관 평가</h1>
         <div className="bg-white p-6 rounded-lg shadow-md">
           <div className="flex flex-col md:flex-row justify-between items-center mb-4 space-y-4 md:space-y-0">
             <div className="flex flex-wrap justify-center md:justify-start gap-2">
