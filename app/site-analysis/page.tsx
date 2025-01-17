@@ -147,7 +147,7 @@ export default function SiteRatings() {
     <Link href={`/site-analysis/${site.domain}`} key={site.domain} className="block">
       <div className="border p-4 rounded-lg hover:shadow-md transition-shadow">
         <div className="flex items-center mb-2">
-          <Image src={`/placeholder.svg?height=50&width=50&text=${site.name} Logo`} alt={`${site.name} 로고`} width={50} height={50} className="mr-4" />
+          <Image src={`/TermCompass_logo.png`} alt={`${site.name} 로고`} width={50} height={50} className="mr-4" />
           <div>
             <h2 className="text-xl font-semibold">{site.name}</h2>
             <p className="text-blue-600">{site.domain}</p>
@@ -178,8 +178,8 @@ export default function SiteRatings() {
 
   return (
     <Layout>
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6 text-blue-800">사이트별 등급과 약관 평가</h1>
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-3xl font-bold text-blue-800 p-8">사이트별 등급과 약관 평가</h1>
         <div className="bg-white p-6 rounded-lg shadow-md">
           <div className="flex flex-col md:flex-row justify-between items-center mb-4 space-y-4 md:space-y-0">
             <div className="flex flex-wrap justify-center md:justify-start gap-2">
