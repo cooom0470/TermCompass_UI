@@ -50,8 +50,8 @@ export default function NewsAndNoticeSection() {
     }
 
   return (
-    <section className="h-full py-16 flex items-center">
-      <div className="container mx-auto px-4">
+    <section className="min-h-[calc(100vh-8rem)] py-8 sm:py-16 flex items-center overflow-hidden">
+      <div className="container mx-auto px-4 relative">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
           <div>
             <h2 className="text-3xl font-bold mb-6 text-center">공지사항</h2>
@@ -75,7 +75,7 @@ export default function NewsAndNoticeSection() {
               ))}
             </Tabs>
           </div>
-          <div className="relative">
+          <div className="relative overflow-hidden">
             <h2 className="text-3xl font-bold mb-6 text-center">포토 뉴스</h2>
             <Card className="flex flex-col items-center justify-center h-auto mx-auto p-4 shadow-lg rounded-lg">
               <CardHeader className="w-full flex items-center justify-center">
@@ -91,10 +91,18 @@ export default function NewsAndNoticeSection() {
                 <CardTitle>{newsItems[currentIndex].title}</CardTitle>
               </CardContent>
             </Card>
-            <Button variant="outline" className="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-full" onClick={prevSlide}>
-                      <ChevronLeft className="h-4 w-4" />
+            <Button
+              variant="outline"
+              className="absolute top-1/2 left-2 transform -translate-y-1/2 z-10"
+              onClick={prevSlide}
+            >
+              <ChevronLeft className="h-4 w-4" />
             </Button>
-            <Button variant="outline" className="absolute top-1/2 right-0 transform -translate-y-1/2 translate-x-full" onClick={nextSlide}>
+            <Button
+              variant="outline"
+              className="absolute top-1/2 right-2 transform -translate-y-1/2 z-10"
+              onClick={nextSlide}
+            >
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
