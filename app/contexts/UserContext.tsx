@@ -4,12 +4,12 @@ import React, { createContext, useContext, useState, ReactNode } from 'react'
 
 interface User {
   email: string
-  userType: 'individual' | 'business'
+  userType: 'PERSONAL' | 'COMPANY'
 }
 
 interface UserContextType {
   user: User | null
-  login: (email: string, userType: 'individual' | 'business') => void
+  login: (email: string, userType: 'PERSONAL' | 'COMPANY') => void
   logout: () => void
 }
 
@@ -18,7 +18,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined)
 export function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
 
-  const login = (email: string, userType: 'individual' | 'business') => {
+  const login = (email: string, userType: 'PERSONAL' | 'COMPANY') => {
     setUser({ email, userType })
   }
 

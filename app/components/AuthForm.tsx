@@ -10,14 +10,14 @@ import { X } from 'lucide-react'
 import TermsAgreement from './TermsAgreement'
 
 interface AuthFormProps {
-  onSubmit: (email: string, password: string, userType: 'individual' | 'business', additionalInfo: string, isLogin: boolean) => void
+  onSubmit: (email: string, password: string, userType: 'PERSONAL' | 'COMPANY', additionalInfo: string, isLogin: boolean) => void
   onCancel: () => void
 }
 
 export default function AuthForm({ onSubmit, onCancel }: AuthFormProps) {
   const [isLogin, setIsLogin] = useState(true)
   const [showTerms, setShowTerms] = useState(false)
-  const [userType, setUserType] = useState<'individual' | 'business'>('individual')
+  const [userType, setUserType] = useState<'PERSONAL' | 'COMPANY'>('PERSONAL')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
@@ -80,14 +80,14 @@ export default function AuthForm({ onSubmit, onCancel }: AuthFormProps) {
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label>사용자 유형</Label>
-              <RadioGroup defaultValue="individual" onValueChange={(value) => setUserType(value as 'individual' | 'business')}>
+              <RadioGroup defaultValue="PERSONAL" onValueChange={(value) => setUserType(value as 'PERSONAL' | 'COMPANY')}>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="individual" id="individual" />
-                  <Label htmlFor="individual">개인 사용자</Label>
+                  <RadioGroupItem value="PERSONAL" id="PERSONAL" />
+                  <Label htmlFor="PERSONAL">개인 사용자</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="business" id="business" />
-                  <Label htmlFor="business">기업 사용자</Label>
+                  <RadioGroupItem value="COMPANY" id="COMPANY" />
+                  <Label htmlFor="COMPANY">기업 사용자</Label>
                 </div>
               </RadioGroup>
             </div>
@@ -95,25 +95,25 @@ export default function AuthForm({ onSubmit, onCancel }: AuthFormProps) {
               <>
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="additionalInfo">
-                    {userType === 'individual' ? '이름' : '기업명'}
+                    {userType === 'PERSONAL' ? '이름' : '기업명'}
                   </Label>
-                  <Input 
-                    id="additionalInfo" 
-                    type="text" 
-                    placeholder={userType === 'individual' ? '홍길동' : '주식회사 예시'} 
+                  <Input
+                    id="additionalInfo"
+                    type="text"
+                    placeholder={userType === 'PERSONAL' ? '홍길동' : '주식회사 예시'}
                     value={additionalInfo}
                     onChange={(e) => setAdditionalInfo(e.target.value)}
-                    required 
+                    required
                   />
                 </div>
-                {userType === 'business' && (
+                {userType === 'COMPANY' && (
                   <div className="flex flex-col space-y-1.5">
                     <Label htmlFor="businessNumber">사업자등록번호</Label>
-                    <Input 
-                      id="businessNumber" 
-                      type="text" 
-                      placeholder="123-45-67890" 
-                      required 
+                    <Input
+                      id="businessNumber"
+                      type="text"
+                      placeholder="123-45-67890"
+                      required
                     />
                   </div>
                 )}
@@ -121,34 +121,34 @@ export default function AuthForm({ onSubmit, onCancel }: AuthFormProps) {
             )}
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email">이메일</Label>
-              <Input 
-                id="email" 
-                type="email" 
-                placeholder="name@example.com" 
+              <Input
+                id="email"
+                type="email"
+                placeholder="name@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                required 
+                required
               />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="password">비밀번호</Label>
-              <Input 
-                id="password" 
-                type="password" 
+              <Input
+                id="password"
+                type="password"
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value)
                   setPasswordMatch(e.target.value === passwordConfirm)
                 }}
-                required 
+                required
               />
             </div>
             {!isLogin && (
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="passwordConfirm">비밀번호 확인</Label>
-                <Input 
-                  id="passwordConfirm" 
-                  type="password" 
+                <Input
+                  id="passwordConfirm"
+                  type="password"
                   value={passwordConfirm}
                   onChange={(e) => {
                     setPasswordConfirm(e.target.value)
@@ -157,7 +157,7 @@ export default function AuthForm({ onSubmit, onCancel }: AuthFormProps) {
                       setHasStartedConfirmation(true)
                     }
                   }}
-                  required 
+                  required
                 />
                 {!passwordMatch && hasStartedConfirmation && (
                   <p className="text-red-500 text-sm">비밀번호가 일치하지 않습니다.</p>

@@ -18,7 +18,7 @@ export default function CreateTerms() {
   const { user } = useUser()
   const router = useRouter()
 
-  if (!user || user.userType !== 'business') {
+  if (!user || user.userType !== 'COMPANY') {
     router.push('/')
     return null
   }
