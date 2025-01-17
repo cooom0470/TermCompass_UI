@@ -12,7 +12,7 @@ import OriginalDocument from '../components/OriginalDocument'
 
 export default function ReviewRequest() {
   const [pdfContent, setPdfContent] = useState<string | null>(null)
-  const [isPdfUploaded, setIsPdfUploaded] = useState(false) // Update 1
+  const [isPdfUploaded, setIsPdfUploaded] = useState(false)
   const [reviewResult, setReviewResult] = useState<string | null>(null)
   const [isReviewing, setIsReviewing] = useState(false)
   const [selectedReviewId, setSelectedReviewId] = useState<number | null>(null)
@@ -32,11 +32,11 @@ export default function ReviewRequest() {
       if (file.type === 'application/pdf') {
         setPdfContent("이것은 업로드된 PDF 파일의 내용입니다. 실제 구현에서는 PDF에서 추출한 텍스트가 여기에 표시됩니다.")
         setReviewResult(null)
+        setIsPdfUploaded(true)
         toast({
           title: "파일 업로드 성공",
           description: "PDF 파일이 성공적으로 업로드되었습니다.",
         })
-        setIsPdfUploaded(true) // Update 2
       } else {
         toast({
           title: "파일 형식 오류",
@@ -44,6 +44,10 @@ export default function ReviewRequest() {
           variant: "destructive"
         })
       }
+    }
+    // 파일 입력 필드 리셋
+    if (e.target) {
+      e.target.value = ''
     }
   }
 
@@ -68,18 +72,24 @@ export default function ReviewRequest() {
     }, 3000)
   }
 
+  const resetReviewState = () => {
+    setPdfContent(null);
+    setIsPdfUploaded(false);
+    setReviewResult(null);
+    setSelectedReviewId(null);
+  };
+
   const handleSelectReview = (reviewId: number | null) => {
-    setSelectedReviewId(reviewId)
     if (reviewId === null) {
-      setPdfContent(null)
-      setReviewResult(null)
+      resetReviewState();
     } else {
+      setSelectedReviewId(reviewId);
       // Fetch the review data from the server
       // For now, we'll use dummy data
-      setPdfContent("이것은 선택된 리뷰의 원본 약관 내용입니다.")
-      setReviewResult("이용약관 중 <span class='bg-yellow-200'>제7조 2항</span>과 <span class='bg-yellow-200'>제12조 1항</span>은 소비자에게 불리한 독소조항으로 의심됩니다. <span class='bg-yellow-200'>제15조 3항</span>은 법적 검토가 필요합니다.")
+      setPdfContent("이것은 선택된 리뷰의 원본 약관 내용입니다.");
+      setReviewResult("이용약관 중 <span class='bg-yellow-200'>제7조 2항</span>과 <span class='bg-yellow-200'>제12조 1항</span>은 소비자에게 불리한 독소조항으로 의심됩니다. <span class='bg-yellow-200'>제15조 3항</span>은 법적 검토가 필요합니다.");
     }
-  }
+  };
 
   return (
     <Layout>
@@ -90,12 +100,12 @@ export default function ReviewRequest() {
           </div>
         )}
         <div className="flex-grow flex flex-col overflow-hidden">
-          <h1 className="text-3xl font-bold mb-6 text-blue-800 p-8">약관 검토 요청</h1>
+          <h1 className="text-3xl font-bold text-blue-800 px-8 pt-8">약관 검토 요청</h1>
           <div className="flex-grow flex overflow-hidden">
-            <div className="w-1/2 p-8 flex flex-col">
+            <div className="w-1/2 p-10 flex flex-col">
               {selectedReviewId === null ? (
                 <>
-                  {!isPdfUploaded && ( // Update 3
+                  {!isPdfUploaded && (
                     <div className="mb-4">
                       <input
                         type="file"
@@ -104,7 +114,7 @@ export default function ReviewRequest() {
                         onChange={handleFileUpload}
                         style={{ display: 'none' }}
                       />
-                      <Button className="bg-black text-white hover:bg-blue-600" onClick={() => fileInputRef.current?.click()}>
+                      <Button onClick={() => fileInputRef.current?.click()}>
                         PDF 업로드
                       </Button>
                     </div>
@@ -116,18 +126,20 @@ export default function ReviewRequest() {
                         <p>{pdfContent}</p>
                       </ScrollArea>
                       <Button
-                        className="mt-4 bg-black text-white hover:bg-blue-600"
+                        className="mt-4"
                         onClick={handleReviewRequest}
                         disabled={isReviewing}
                       >
                         {isReviewing ? '검토 중...' : '약관 검토 요청'}
                       </Button>
-                      {isPdfUploaded && ( // Update 4
+                      {isPdfUploaded && (
                         <Button
-                          className="mt-4 bg-black text-white hover:bg-blue-600"
-                          onClick={() => fileInputRef.current?.click()}
+                          className="mt-4"
+                          onClick={() => {
+                              resetReviewState()
+                          }}
                         >
-                          PDF 재업로드
+                          초기화
                         </Button>
                       )}
                     </div>
