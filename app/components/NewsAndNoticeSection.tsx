@@ -111,7 +111,7 @@ export default function NewsAndNoticeSection() {
           </div>
         </div>
       </section>
-      <FooterSection />
+
     </div>
   )
 }

@@ -52,7 +52,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { href: '/board', label: '게시판' },
 
       ...(user
-      ? user.userType === 'business'
+      ? user.userType === 'COMPANY'
         ? [
             { href: '/create-terms', label: '약관 생성' },
             { href: '/modify-terms', label: '약관 수정' },
