@@ -34,7 +34,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const businessOnlyPaths = ['/create-terms', '/modify-terms', '/business-history']
-    if (!isLoggingOut && businessOnlyPaths.includes(pathname) && (!user || user.userType !== 'business')) {
+    if (!isLoggingOut && businessOnlyPaths.includes(pathname) && (!user || user.userType !== 'COMPANY')) {
       toast({
         title: "접근 제한",
         description: "이 기능은 기업 사용자 전용입니다.",
@@ -52,7 +52,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { href: '/board', label: '게시판' },
 
       ...(user
-      ? user.userType === 'business'
+      ? user.userType === 'COMPANY'
         ? [
             { href: '/create-terms', label: '약관 생성' },
             { href: '/modify-terms', label: '약관 수정' },
@@ -65,7 +65,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     ),
   ]
 
-  const handleAuthSubmit = (email: string, password: string, userType: 'individual' | 'business', additionalInfo: string, isLogin: boolean) => {
+  const handleAuthSubmit = (email: string, password: string, userType: 'PERSONAL' | 'COMPANY', additionalInfo: string, isLogin: boolean) => {
     // For this example, we'll just log in the user directly
     login(email, userType)
     setShowAuthForm(false)
