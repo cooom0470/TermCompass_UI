@@ -46,7 +46,7 @@ export default function ServicesSection() {
   };
 
   return (
-    <section className="h-[calc(100vh-8rem)] py-4 bg-gray-100 flex flex-col">
+    <section className="h-[calc(100vh-6rem)] py-4 bg-gray-100 flex flex-col">
       <div className="container mx-auto px-4 flex flex-col justify-between h-full">
         {/* h3와 맨 위, 슬라이드 카드 간격 동적 조정 */}
         <h3

@@ -65,7 +65,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     ),
   ]
 
-  const handleAuthSubmit = (email: string, password: string, userType: 'PERSONAL' | 'business', additionalInfo: string, isLogin: boolean) => {
+  const handleAuthSubmit = (email: string, password: string, userType: 'PERSONAL' | 'COMPANY', additionalInfo: string, isLogin: boolean) => {
     // Here you would typically make an API call to authenticate the user
     // For this example, we'll just log in the user directly
     login(email, userType)
@@ -141,9 +141,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <main className="flex-grow items-center justify-center overflow-y-auto">
         {children}
       </main>
-      <footer className="bg-gray-200 bg-opacity-50 text-center py-3">
-        <p>&copy; 2025 약관나침반. All rights reserved.</p>
-      </footer>
       {showAuthForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <AuthForm
