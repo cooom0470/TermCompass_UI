@@ -49,7 +49,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { href: '/ai-chatbot', label: 'AI 챗봇' },
     { href: '/site-analysis', label: '사이트 등급' },
     { href: '/review-request', label: '약관 검토' },
-    { href: '/review-request', label: '게시판' },
+    { href: '/board', label: '게시판' },
 
       ...(user
       ? user.userType === 'business'
@@ -66,7 +66,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   ]
 
   const handleAuthSubmit = (email: string, password: string, userType: 'individual' | 'business', additionalInfo: string, isLogin: boolean) => {
-    // Here you would typically make an API call to authenticate the user
     // For this example, we'll just log in the user directly
     login(email, userType)
     setShowAuthForm(false)

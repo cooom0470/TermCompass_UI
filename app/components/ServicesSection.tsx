@@ -42,6 +42,9 @@ export default function ServicesSection() {
       const newIndex = prevIndex - slidesToShow;
       return newIndex >= 0 ? newIndex : Math.max(topWebsites.length - slidesToShow, 0);
     });
+    const clickform=()=>{
+
+    }
   };
 
   return (
@@ -59,13 +62,13 @@ export default function ServicesSection() {
                   }}
               >
                 {topWebsites.map((website, index) => (
-                    <div
+                    <a
                         key={index}
-                        className="w-1/3 flex-shrink-0 p-4 border rounded-lg shadow-md"
-
+                        href={website.link} // 링크로 이동
+                        className="w-1/3 flex-shrink-0 p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow block"
                     >
                       <div className="flex flex-col md:flex-row items-center justify-between gap-8 px-4 mb-4">
-                        <div className="w-full md:w-1/5 ">
+                        <div className="w-full md:w-1/5">
                           <img
                               src="/TermCompass_logo.png"
                               alt="Example"
@@ -75,33 +78,33 @@ export default function ServicesSection() {
                         <div className="w-full text-left">
                           <h3 className="text-xl font-bold mb-2">{website.name}</h3>
                         </div>
-
                       </div>
 
-                      <h4 className="text-3xl text-left ml-5 font-semibold text-green-600 ">장점</h4>
+                      <h4 className="text-3xl text-left ml-5 font-semibold text-green-600">장점</h4>
                       <ul className="text-xl text-left ml-9 list-disc list-inside text-gray-700">
                         {website.benefits.map((benefit, i) => (
                             <li key={i}>{benefit}</li>
                         ))}
                       </ul>
+
                       <h4 className="text-3xl text-left ml-5 font-semibold text-red-600 mt-4">단점</h4>
                       <ul className="text-xl text-left ml-9 list-disc list-inside text-gray-700">
-                      {website.drawbacks.map((drawback, i) => (
+                        {website.drawbacks.map((drawback, i) => (
                             <li key={i}>{drawback}</li>
                         ))}
                       </ul>
-                    </div>
+                    </a>
                 ))}
               </div>
               <button
                   onClick={prevSlide}
-                  className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
+                  className="absolute top-1/2 left-1 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
               >
                 &lt;
               </button>
               <button
                   onClick={nextSlide}
-                  className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
+                  className="absolute top-1/2 right-1 transform -translate-y-1/2  bg-gray-800 text-white p-2 rounded-full"
               >
                 &gt;
               </button>

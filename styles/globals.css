@@ -5,7 +5,12 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
-
+@font-face {
+  font-family: 'goverment';
+  src: url('public/fonts/goverment.ttf') format('truetype');
+  font-weight: normal; /* Add more weights if applicable */
+  font-style: normal;
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;
