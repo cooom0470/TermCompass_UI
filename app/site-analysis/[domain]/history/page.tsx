@@ -158,7 +158,7 @@ export default function GradeHistory() {
             </TableBody>
           </Table>
         </div>
-        <Button onClick={() => router.back()}>
+        <Button className="bg-black text-white hover:bg-blue-600" onClick={() => router.back()}>
           현재 버전 평가로 돌아가기
         </Button>
       </div>
