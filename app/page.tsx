@@ -76,7 +76,6 @@ export default function Home() {
           <NewsAndNoticeSection />
         </div>
         <div className="snap-start h-[10vh]">
-          <FooterSection />
         </div>
       </div>
       <SectionNavigation activeSection={activeSection} onNavigate={scrollToSection} />

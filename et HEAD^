@@ -1,0 +1,289 @@
+[33mcommit cff3e4ff91bffb608cd0e7ff5870eaa6f622911d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 8d441cd 0789b65
+Author: RodRic99 <128597511+RodRic99@users.noreply.github.com>
+Date:   Mon Jan 20 15:41:17 2025 +0900
+
+    Merge branch 'main' of https://github.com/TermCompass/TermCompass_UI
+
+[33mcommit 8d441cd1289d1644ef2e5ac6daeb59a0ce164e02[m
+Author: RodRic99 <128597511+RodRic99@users.noreply.github.com>
+Date:   Mon Jan 20 15:30:43 2025 +0900
+
+    게시판 추가 일단 DB없이 간단한 데이터값으로 게시판 만듬 옆에 메뉴판 은 추후 개선예정
+
+[33mcommit 0789b651e4f1b3a03c2ec54ded852257f1056b3f[m
+Author: JJ <kcg7799@gmail.com>
+Date:   Mon Jan 20 11:42:03 2025 +0900
+
+    style: footer 영역 section으로 구분, 스크롤 끝까지 내렸을때만 출력
+
+[33mcommit 08cc49cdb43651db6268c1d6879123cb81a156ca[m
+Merge: 3e2f4e3 9768f20
+Author: Jeongryeol Lee <dlwjdfuf99@naver.com>
+Date:   Sat Jan 18 00:21:40 2025 +0900
+
+    Merge pull request #8 from JReal2/main
+    
+    메인화면 반응형 설정 및 백엔드 api용 axios 설치
+
+[33mcommit 9768f208bbab7d86b6a14aad25c89c885b5c58a2[m
+Merge: 721abd4 3e2f4e3
+Author: Jeongryeol Lee <dlwjdfuf99@naver.com>
+Date:   Sat Jan 18 00:20:46 2025 +0900
+
+    Merge branch 'main' of https://github.com/JReal2/TermCompass_UI
+
+[33mcommit 721abd4ef2ad358993e344fbc1c866781d3d1189[m
+Author: Jeongryeol Lee <dlwjdfuf99@naver.com>
+Date:   Sat Jan 18 00:20:39 2025 +0900
+
+    feat: 메인화면 반응형 설정
+
+[33mcommit df959f00a51033f36a5d52c4c335ddc250e3a887[m
+Author: Jeongryeol Lee <dlwjdfuf99@naver.com>
+Date:   Sat Jan 18 00:19:33 2025 +0900
+
+    feat: 백엔드 연결용 axios 설치
+
+[33mcommit 3e2f4e359ced89f00d68d4765438715c02a34155[m
+Merge: fba5313 b458011
+Author: Jeongryeol Lee <dlwjdfuf99@naver.com>
+Date:   Fri Jan 17 15:25:54 2025 +0900
+
+    Merge pull request #7 from JReal2/main
+    
+    fix: 사용자 타입 ERD 맞게 enum 수정
+
+[33mcommit b458011c9394a620266de44a15c3e404c86a7703[m
+Author: Jeongryeol Lee <dlwjdfuf99@naver.com>
+Date:   Fri Jan 17 15:25:02 2025 +0900
+
+    fix: 사용자 타입 ERD 맞게 수정
+
+[33mcommit fba531353e2926078fce8b08ced26183f3e317d4[m
+Merge: 6d7e3a2 873c5df
+Author: Jeongryeol Lee <dlwjdfuf99@naver.com>
+Date:   Fri Jan 17 13:31:51 2025 +0900
+
+    Merge pull request #6 from JReal2/main
+    
+    style: 글씨 크기 및 화면 구성 정리
+
+[33mcommit 873c5dff2f1423add6f796ffcbc1e8f67de9453d[m
+Author: Jeongryeol Lee <dlwjdfuf99@naver.com>
+Date:   Fri Jan 17 13:30:30 2025 +0900
+
+    style: 글씨 크기 및 화면 구성 정리
+
+[33mcommit 6d7e3a2b640cd7c3a0dfb7f538911e64b0113764[m
+Merge: 2446891 55a41ca
+Author: RodRic99 <128597511+RodRic99@users.noreply.github.com>
+Date:   Fri Jan 17 13:11:13 2025 +0900
+
+    메인페이지 슬라이드 변경함 로고전시 일정개수의 슬라이드 보이게해서 직관적으로 보이게 해놓음
+
+[33mcommit 2446891e50557dc4dedfa290d671639b42f8cbff[m
+Author: RodRic99 <128597511+RodRic99@users.noreply.github.com>
+Date:   Fri Jan 17 13:07:24 2025 +0900
+
+    메인페이지 추가 수정
+    
+    슬라이드로 변경
+
+[33mcommit 55a41cae357520bc898aaad05015ac6e39d93dd1[m
+Merge: 41465a0 c22eb7d
+Author: Jeongryeol Lee <dlwjdfuf99@naver.com>
+Date:   Fri Jan 17 13:02:01 2025 +0900
+
+    Merge pull request #5 from JReal2/main
+    
+    자잘한 버그 및 화면 비율 수정
+
+[33mcommit c22eb7dc944ebbcaf6f86cf891975498060a6645[m
+Author: Jeongryeol Lee <dlwjdfuf99@naver.com>
+Date:   Fri Jan 17 12:04:39 2025 +0900
+
+    fix: 약관 검토 페이지 버그 수정
+
+[33mcommit f2d65762d4e6e93e37f9b26eeba558a545be6fa7[m
+Author: Jeongryeol Lee <dlwjdfuf99@naver.com>
+Date:   Fri Jan 17 12:03:11 2025 +0900
+
+    Update README.md
+
+[33mcommit 91e60c4dd2ddcd754d0ee5f2729abcc0535a70d2[m
+Author: Jeongryeol Lee <dlwjdfuf99@naver.com>
+Date:   Fri Jan 17 12:02:25 2025 +0900
+
+    style: 메인화면, 사이트 등급 화면 정리
+
+[33mcommit 9e3096893e44ca51160962640c1ad9ede9a3eda5[m
+Author: Jeongryeol Lee <dlwjdfuf99@naver.com>
+Date:   Fri Jan 17 11:58:43 2025 +0900
+
+    feat: 사이트 상세 약관 평가 돌아가기 버튼 추가
+
+[33mcommit 1b819bf4a8068b0a2a59b991ed2b6f9b0d2e776a[m
+Author: Jeongryeol Lee <dlwjdfuf99@naver.com>
+Date:   Fri Jan 17 11:52:35 2025 +0900
+
+    style: 임시 이미지 및 로고 삽입
+
+[33mcommit 41465a0d1cc77ceaea00efadbe524c5c830269b6[m
+Author: RodRic99 <128597511+RodRic99@users.noreply.github.com>
+Date:   Thu Jan 16 17:22:11 2025 +0900
+
+    메인페이지 사이트별 장단점미리보기
+    
+    메인단에 사이트별 장단점 미리보기 업데이트
+
+[33mcommit 7e866a0f05d4e977c12a1a826f8a43857e8341dd[m
+Author: JJ <kcg7799@gmail.com>
+Date:   Thu Jan 16 17:18:02 2025 +0900
+
+    style: 버튼 스타일 호버 효과 추가, site-analysis page UI 개선, create-terms 이전버튼 추가
+    fix: 404, 500 에러 페이지 root로 리다이렉트
+
+[33mcommit 11c250d322fd0fea6f235f3acfce13ed481605fd[m
+Merge: 04902c3 c6e41bf
+Author: Jeongryeol Lee <49389212+JReal2@users.noreply.github.com>
+Date:   Thu Jan 16 15:47:21 2025 +0900
+
+    Merge pull request #4 from JReal2/main
+    
+    메인화면 전체 적용
+
+[33mcommit c6e41bfb8bdee0deecf46c2eb0abaf0c3cd558dc[m
+Author: Jeongryeol Lee <dlwjdfuf99@naver.com>
+Date:   Thu Jan 16 15:46:30 2025 +0900
+
+    feat: 약관 검토 화면 사이드바 추가
+
+[33mcommit d641a72461c855c85e586b69a1e31f9bf3d3ad7d[m
+Author: Jeongryeol Lee <dlwjdfuf99@naver.com>
+Date:   Thu Jan 16 15:45:47 2025 +0900
+
+    style: 메인화면 역동적 구성
+
+[33mcommit 04902c3af233f78d1d1116f33fc68d5dc5d0313f[m
+Author: Jeongryeol Lee <49389212+JReal2@users.noreply.github.com>
+Date:   Thu Jan 16 13:03:44 2025 +0900
+
+    Update README.md
+
+[33mcommit ddf03784891f6aa7ffc4c0078d289df1469992ac[m
+Author: Jeongryeol Lee <dlwjdfuf99@naver.com>
+Date:   Thu Jan 16 11:38:55 2025 +0900
+
+    fix: 불필요한 주석 제거
+
+[33mcommit 0456d8a5b8b4a7bea89a03aa493c7f6055ef0a2d[m
+Author: JReal2 <dlwjdfuf99@naver.com>
+Date:   Thu Jan 16 11:33:45 2025 +0900
+
+    style: AI 챗봇 화면 수정
+
+[33mcommit d95ee8fd5a72b5d567f75392f4053758dcf5f350[m
+Author: JR <dlwjdfuf99@naver.com>
+Date:   Thu Jan 16 11:19:54 2025 +0900
+
+    fix: 메인 화면 최하단 섹션 수정
+
+[33mcommit f57496d4f3b6a633cc91b2ece15cc21ad9c557a3[m
+Author: JR <dlwjdfuf99@naver.com>
+Date:   Thu Jan 16 09:58:29 2025 +0900
+
+    fix: 섹션 내비게이터 미반영 수정
+
+[33mcommit 5abb84d140444e043d44007ab830b360875ca609[m
+Author: JR <dlwjdfuf99@naver.com>
+Date:   Thu Jan 16 09:55:54 2025 +0900
+
+    feat: 스크롤바 삭제 및 섹션 내비게이터 생성
+
+[33mcommit 5f442b915ecd713c5efbebdb54a98d928feb4421[m
+Author: JR <dlwjdfuf99@naver.com>
+Date:   Wed Jan 15 16:42:06 2025 +0900
+
+    style: 각 페이지에 마진 적용
+
+[33mcommit f1ae73710892e822357e70991bea7b8e6b88ea9a[m
+Author: JR <dlwjdfuf99@naver.com>
+Date:   Wed Jan 15 16:30:48 2025 +0900
+
+    style: 사이트 등급 화면 요소 출력 방식 변경
+
+[33mcommit 7adcf8a4b23c8e31a77215957640b78fe3c9a240[m
+Author: JR <dlwjdfuf99@naver.com>
+Date:   Wed Jan 15 16:30:22 2025 +0900
+
+    feat: AI 챗봇 사이드바 추가
+
+[33mcommit 52fb4540da5414d8d849cca4a4aacd9ccd063346[m
+Author: JR <dlwjdfuf99@naver.com>
+Date:   Wed Jan 15 16:29:40 2025 +0900
+
+    feat: 메인 화면 서비스 섹션 생성
+
+[33mcommit a32a24710b4359dccdd3c1ccfca2554339e434ec[m
+Author: JR <dlwjdfuf99@naver.com>
+Date:   Wed Jan 15 16:29:01 2025 +0900
+
+    feat: 메인 화면 스크롤 섹션 분리
+
+[33mcommit e501515ded02c7699360c056df7b1e206827b6df[m
+Merge: 0d6b26b 64350c4
+Author: Jeongryeol Lee <49389212+JReal2@users.noreply.github.com>
+Date:   Wed Jan 15 14:38:21 2025 +0900
+
+    Merge pull request #3 from JReal2/main
+    
+    feat: 내비게이션 바 햄버거 버튼 추가
+
+[33mcommit 64350c44a55e454a85bc2d975d0259856961ed12[m
+Author: JR <dlwjdfuf99@naver.com>
+Date:   Wed Jan 15 14:37:31 2025 +0900
+
+    feat: 내비게이션 바 햄버거 버튼 추가
+
+[33mcommit 0d6b26bbb31b78a0f62e3077d358b7f2dd404fb9[m
+Merge: 36147c3 c23e89a
+Author: Jeongryeol Lee <49389212+JReal2@users.noreply.github.com>
+Date:   Wed Jan 15 13:29:46 2025 +0900
+
+    Merge pull request #2 from JReal2/main
+    
+    feat: 로그아웃 시 알림 미생성
+
+[33mcommit c23e89a2e9e07eb3192845975114bc6077db5bbe[m
+Author: JR <dlwjdfuf99@naver.com>
+Date:   Wed Jan 15 13:29:18 2025 +0900
+
+    feat: 로그아웃 시 알림 미생성
+
+[33mcommit 36147c332278cd283ff5e408a3989bcbdb983ec6[m
+Merge: f7151ac 4630edc
+Author: Jeongryeol Lee <49389212+JReal2@users.noreply.github.com>
+Date:   Wed Jan 15 13:11:52 2025 +0900
+
+    Merge pull request #1 from JReal2/main
+    
+    fix: components 경로 수정 및 코드 수정
+
+[33mcommit 4630edc63e889a996309e375635cb5e92e001d3f[m
+Author: JR <dlwjdfuf99@naver.com>
+Date:   Wed Jan 15 13:11:20 2025 +0900
+
+    fix: components 경로 수정 및 코드 수정
+
+[33mcommit f7151ac06981bbf2cdf4c066b78b4c21cfe13039[m
+Author: JR <dlwjdfuf99@naver.com>
+Date:   Wed Jan 15 11:09:15 2025 +0900
+
+    fix: 누락된 css 및 public 추가
+
+[33mcommit 9f6dcc8451ca488ec241e525d4a00f1e8723b67b[m
+Author: JR <dlwjdfuf99@naver.com>
+Date:   Tue Jan 14 16:32:56 2025 +0900
+
+    first commit

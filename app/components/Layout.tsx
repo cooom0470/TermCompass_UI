@@ -34,7 +34,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const businessOnlyPaths = ['/create-terms', '/modify-terms', '/business-history']
-    if (!isLoggingOut && businessOnlyPaths.includes(pathname) && (!user || user.userType !== 'COMPANY')) {
+    if (!isLoggingOut && businessOnlyPaths.includes(pathname) && (!user || user.userType !== 'business')) {
       toast({
         title: "접근 제한",
         description: "이 기능은 기업 사용자 전용입니다.",
@@ -49,7 +49,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { href: '/ai-chatbot', label: 'AI 챗봇' },
     { href: '/site-analysis', label: '사이트 등급' },
     { href: '/review-request', label: '약관 검토' },
-    { href: '/review-request', label: '게시판' },
+    { href: '/board', label: '게시판' },
 
       ...(user
       ? user.userType === 'COMPANY'
@@ -65,8 +65,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     ),
   ]
 
-  const handleAuthSubmit = (email: string, password: string, userType: 'PERSONAL' | 'COMPANY', additionalInfo: string, isLogin: boolean) => {
-    // Here you would typically make an API call to authenticate the user
+  const handleAuthSubmit = (email: string, password: string, userType: 'individual' | 'business', additionalInfo: string, isLogin: boolean) => {
     // For this example, we'll just log in the user directly
     login(email, userType)
     setShowAuthForm(false)
@@ -141,6 +140,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <main className="flex-grow items-center justify-center overflow-y-auto">
         {children}
       </main>
+      <footer className="bg-gray-200 text-center py-4">
+        <p>&copy; 2025 약관나침반. All rights reserved.</p>
+      </footer>
       {showAuthForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <AuthForm
