@@ -93,7 +93,7 @@ export default function ReviewRequest() {
 
   return (
     <Layout>
-      <div className="flex h-[calc(100vh-8rem)]">
+      <div className="flex h-[calc(100vh-8rem)] p-4">
         {user && (
           <div className="w-64 flex-shrink-0">
             <ReviewSidebar onSelectReview={handleSelectReview} selectedReviewId={selectedReviewId} />

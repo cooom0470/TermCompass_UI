@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
+import FooterSection from './FooterSection'
 
 const notices = {
   government: [
@@ -50,56 +51,67 @@ export default function NewsAndNoticeSection() {
     }
 
   return (
-    <section className="h-full py-16 flex items-center">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
-          <div>
-            <h2 className="text-3xl font-bold mb-6 text-center">공지사항</h2>
-            <Tabs defaultValue="government" className="w-full">
-              <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="government">정부 공지</TabsTrigger>
-                <TabsTrigger value="agency">진흥원 공지</TabsTrigger>
-                <TabsTrigger value="site">사이트 공지</TabsTrigger>
-              </TabsList>
-              {Object.entries(notices).map(([key, items]) => (
-                <TabsContent key={key} value={key}>
-                  <ul className="space-y-2">
-                    {items.map((item, index) => (
-                      <li key={index} className="flex justify-between items-center border-b pb-2">
-                        <span>{item.title}</span>
-                        <span className="text-sm text-gray-500">{item.date}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </TabsContent>
-              ))}
-            </Tabs>
-          </div>
-          <div className="relative">
-            <h2 className="text-3xl font-bold mb-6 text-center">포토 뉴스</h2>
-            <Card className="flex flex-col items-center justify-center h-auto mx-auto p-4 shadow-lg rounded-lg">
-              <CardHeader className="w-full flex items-center justify-center">
-                <Image
-                  src={newsItems[currentIndex].image || "/placeholder.svg"}
-                  alt={newsItems[currentIndex].title}
-                  width={400}
-                  height={200}
-                  className="rounded-t-lg"
-                />
-              </CardHeader>
-              <CardContent>
-                <CardTitle>{newsItems[currentIndex].title}</CardTitle>
-              </CardContent>
-            </Card>
-            <Button variant="outline" className="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-full" onClick={prevSlide}>
-                      <ChevronLeft className="h-4 w-4" />
-            </Button>
-            <Button variant="outline" className="absolute top-1/2 right-0 transform -translate-y-1/2 translate-x-full" onClick={nextSlide}>
-              <ChevronRight className="h-4 w-4" />
-            </Button>
+    <div className="flex flex-col">
+      <section className="min-h-[calc(90vh)] py-8 sm:py-16 flex items-center overflow-hidden">
+        <div className="container mx-auto px-4 relative">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
+            <div>
+              <h2 className="text-3xl font-bold mb-6 text-center">공지사항</h2>
+              <Tabs defaultValue="government" className="w-full">
+                <TabsList className="grid w-full grid-cols-3">
+                  <TabsTrigger value="government">정부 공지</TabsTrigger>
+                  <TabsTrigger value="agency">진흥원 공지</TabsTrigger>
+                  <TabsTrigger value="site">사이트 공지</TabsTrigger>
+                </TabsList>
+                {Object.entries(notices).map(([key, items]) => (
+                  <TabsContent key={key} value={key}>
+                    <ul className="space-y-2">
+                      {items.map((item, index) => (
+                        <li key={index} className="flex justify-between items-center border-b pb-2">
+                          <span>{item.title}</span>
+                          <span className="text-sm text-gray-500">{item.date}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </TabsContent>
+                ))}
+              </Tabs>
+            </div>
+            <div className="relative overflow-hidden">
+              <h2 className="text-3xl font-bold mb-6 text-center">포토 뉴스</h2>
+              <Card className="flex flex-col items-center justify-center h-auto mx-auto p-4 shadow-lg rounded-lg">
+                <CardHeader className="w-full flex items-center justify-center">
+                  <Image
+                    src={newsItems[currentIndex].image || "/placeholder.svg"}
+                    alt={newsItems[currentIndex].title}
+                    width={400}
+                    height={200}
+                    className="rounded-t-lg"
+                  />
+                </CardHeader>
+                <CardContent>
+                  <CardTitle>{newsItems[currentIndex].title}</CardTitle>
+                </CardContent>
+              </Card>
+              <Button
+                variant="outline"
+                className="absolute top-1/2 left-2 transform -translate-y-1/2 z-10"
+                onClick={prevSlide}
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              <Button
+                variant="outline"
+                className="absolute top-1/2 right-2 transform -translate-y-1/2 z-10"
+                onClick={nextSlide}
+              >
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <FooterSection />
+    </div>
   )
 }

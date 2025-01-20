@@ -14,7 +14,7 @@ interface NavItem {
 
 interface MobileNavProps {
   navItems: NavItem[]
-  user: { email: string; userType: 'individual' | 'business' } | null
+  user: { email: string; userType: 'PERSONAL' | 'COMPANY' } | null
   onLogout: () => void
   onLogin: () => void
 }
