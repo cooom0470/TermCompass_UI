@@ -140,9 +140,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <main className="flex-grow items-center justify-center overflow-y-auto">
         {children}
       </main>
-      <footer className="bg-gray-200 text-center py-4">
-        <p>&copy; 2025 약관나침반. All rights reserved.</p>
-      </footer>
       {showAuthForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <AuthForm
