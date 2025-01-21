@@ -10,7 +10,7 @@ import { X } from 'lucide-react'
 import TermsAgreement from './TermsAgreement'
 
 interface AuthFormProps {
-  onSubmit: (email: string, password: string, userType: 'PERSONAL' | 'COMPANY', additionalInfo: string, isLogin: boolean) => void
+  onSubmit: (name: string, email: string, password: string, userType: 'PERSONAL' | 'COMPANY', businessNumber: string, isLogin: boolean) => void
   onCancel: () => void
 }
 
@@ -21,17 +21,63 @@ export default function AuthForm({ onSubmit, onCancel }: AuthFormProps) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
-  const [additionalInfo, setAdditionalInfo] = useState('')
+  const [name, setName] = useState('')
+  const [businessNumber, setBusinessNumber] = useState('')
   const [passwordMatch, setPasswordMatch] = useState(true)
   const [hasStartedConfirmation, setHasStartedConfirmation] = useState(false)
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (!isLogin && password !== passwordConfirm) {
       setPasswordMatch(false)
       return
     }
-    onSubmit(email, password, userType, additionalInfo, isLogin)
+
+    // // API 호출
+    // const apiUrl = isLogin
+    //     ? 'http://localhost:8080/login'
+    //     : 'http://localhost:8080/signup'
+    //
+    // const payload = isLogin
+    //     ? { email : email, password : password }
+    //     : {
+    //       name: name,
+    //       account_type: userType,
+    //       password1: password,
+    //       password2: passwordConfirm,
+    //       email: email,
+    //       businessNumber: userType === 'COMPANY' ? businessNumber : undefined
+    //     }
+    //
+    // try {
+    //     const response = await fetch(apiUrl, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(payload)
+    //     })
+    //
+    //     if (!response.ok) {
+    //         throw new Error(isLogin ? '로그인 실패' : '회원가입 실패');
+    //     }
+    //
+    //     if (isLogin) {
+    //         // 로그인 성공 시 처리
+    //         const responseData = await response.json();
+    //         alert(`로그인 성공: ${responseData.name}`);
+    //         onSubmit(name, email, password, userType, businessNumber, isLogin);
+    //     } else {
+    //         // 회원가입 성공 시 처리
+    //         alert('회원가입이 완료되었습니다. 로그인 화면으로 전환합니다.');
+    //         setIsLogin(true);
+    //     }
+    // } catch (error) {
+    //     // @ts-ignore
+    //     alert('에러 발생: ' + error.message);
+    // }
+
+    onSubmit(name, email, password, userType, businessNumber, isLogin);
   }
 
   const handleSignUpClick = () => {
@@ -94,15 +140,15 @@ export default function AuthForm({ onSubmit, onCancel }: AuthFormProps) {
             {!isLogin && (
               <>
                 <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="additionalInfo">
+                  <Label htmlFor="name">
                     {userType === 'PERSONAL' ? '이름' : '기업명'}
                   </Label>
                   <Input
-                    id="additionalInfo"
+                    id="name"
                     type="text"
                     placeholder={userType === 'PERSONAL' ? '홍길동' : '주식회사 예시'}
-                    value={additionalInfo}
-                    onChange={(e) => setAdditionalInfo(e.target.value)}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     required
                   />
                 </div>
@@ -113,6 +159,8 @@ export default function AuthForm({ onSubmit, onCancel }: AuthFormProps) {
                       id="businessNumber"
                       type="text"
                       placeholder="123-45-67890"
+                      value={businessNumber}
+                      onChange={(e) => setBusinessNumber(e.target.value)}
                       required
                     />
                   </div>
