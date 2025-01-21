@@ -65,12 +65,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     ),
   ]
 
-  const handleAuthSubmit = (email: string, password: string, userType: 'PERSONAL' | 'COMPANY', additionalInfo: string, isLogin: boolean) => {
+  const handleAuthSubmit = (name: string, email: string, password: string, userType: 'PERSONAL' | 'COMPANY', businessNumber: string, isLogin: boolean) => {
     // For this example, we'll just log in the user directly
     login(email, userType)
     setShowAuthForm(false)
-    // You can use the additionalInfo for further processing if needed
-    console.log('Additional Info:', additionalInfo)
   }
 
   const handleLogout = () => {

@@ -65,11 +65,12 @@ export default function AuthForm({ onSubmit, onCancel }: AuthFormProps) {
     //     if (isLogin) {
     //         // 로그인 성공 시 처리
     //         const responseData = await response.json();
-    //         alert(`로그인 성공: ${responseData.name}`);
-    //         onSubmit(name, email, password, userType, businessNumber, isLogin);
+    //         alert(`로그인 성공: ${responseData.account_type}님`);
+    //         setUserType(responseData.account_type)
+    //         onSubmit(responseData.name, responseData.email, password, responseData.account_type, businessNumber, isLogin);
     //     } else {
     //         // 회원가입 성공 시 처리
-    //         alert('회원가입이 완료되었습니다. 로그인 화면으로 전환합니다.');
+    //         alert('회원가입 완료');
     //         setIsLogin(true);
     //     }
     // } catch (error) {
@@ -139,6 +140,19 @@ export default function AuthForm({ onSubmit, onCancel }: AuthFormProps) {
             </div>
             {!isLogin && (
               <>
+                {/*<div className="flex flex-col space-y-1.5">*/}
+                {/*  <Label>사용자 유형</Label>*/}
+                {/*  <RadioGroup defaultValue="PERSONAL" onValueChange={(value) => setUserType(value as 'PERSONAL' | 'COMPANY')}>*/}
+                {/*    <div className="flex items-center space-x-2">*/}
+                {/*      <RadioGroupItem value="PERSONAL" id="PERSONAL" />*/}
+                {/*      <Label htmlFor="PERSONAL">개인 사용자</Label>*/}
+                {/*    </div>*/}
+                {/*    <div className="flex items-center space-x-2">*/}
+                {/*      <RadioGroupItem value="COMPANY" id="COMPANY" />*/}
+                {/*      <Label htmlFor="COMPANY">기업 사용자</Label>*/}
+                {/*    </div>*/}
+                {/*  </RadioGroup>*/}
+                {/*</div>*/}
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="name">
                     {userType === 'PERSONAL' ? '이름' : '기업명'}
