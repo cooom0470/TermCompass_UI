@@ -43,14 +43,14 @@ export default function ServicesSection() {
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => {
       const newIndex = prevIndex + slidesToShow;
-      return newIndex < topWebsites.length ? newIndex : 0;
+      return newIndex < topWebsites.length * 3 - 4 ? newIndex : 0;
     });
   };
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) => {
       const newIndex = prevIndex - slidesToShow;
-      return newIndex >= 0 ? newIndex : topWebsites.length - 1;
+      return newIndex >= 0 ? newIndex : topWebsites.length * 3 - 4 - slidesToShow;
     });
   };
 
@@ -72,7 +72,8 @@ export default function ServicesSection() {
           className="text-lg sm:text-2xl font-bold text-center flex-none"
           style={{
             paddingTop: 'calc(3vh)',
-            marginBottom: 'calc(4vh)',
+            marginTop: 'calc(4vh)',
+            marginBottom: 'calc(6vh)',
             fontSize: 'calc(1rem + 1vw)',
           }}
         >
@@ -91,7 +92,7 @@ export default function ServicesSection() {
                 key={index}
                 className="w-full md:w-1/3 flex-shrink-0 p-6 pl-12 border rounded-lg shadow-md bg-white h-full flex flex-col justify-between"
                 style={{
-                  height: 'calc(60vh)',
+                  height: 'calc(30vh)',
                 }}
               >
                 <div
@@ -175,7 +176,7 @@ export default function ServicesSection() {
           </div>
           <Button
             onClick={prevSlide}
-            className="absolute top-1/2 left-2 transform -translate-y-1/2"
+            className="absolute top-1/2 left-2 transform -translate-y-1/2 opacity-50"
             variant="outline"
             size="icon"
           >
@@ -183,7 +184,7 @@ export default function ServicesSection() {
           </Button>
           <Button
             onClick={nextSlide}
-            className="absolute top-1/2 right-2 transform -translate-y-1/2"
+            className="absolute top-1/2 right-2 transform -translate-y-1/2 opacity-50"
             variant="outline"
             size="icon"
           >
@@ -194,9 +195,8 @@ export default function ServicesSection() {
         <div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 flex-none"
           style={{
-            marginBottom: `calc(0.5vh)`,
-            minHeight: 'calc(30vh)',
-            maxHeight: 'calc(40vh)',
+            marginBottom: `calc(5vh)`,
+            height: 'calc(25vh)',
           }}
         >
           {services.map((service, index) => (
@@ -204,8 +204,8 @@ export default function ServicesSection() {
               <a onClick={(e) => handleCardClick(e, service.url)} className="cursor-pointer">
                 <div className="flip-card h-full">
                   <div className="flip-card-inner">
-                    <Card className="flip-card-front h-full flex flex-col justify-between">
-                      <CardHeader>
+                    <Card className="flip-card-front h-full flex flex-col items-center justify-between">
+                      <CardHeader className="items-center">
                         <div className="w-12 h-12 mb-4 text-blue-600">
                           <service.icon className="w-full h-full" />
                         </div>
