@@ -75,7 +75,7 @@ export default function Home() {
         <div className="snap-start h-screen">
           <NewsAndNoticeSection />
         </div>
-        <div className="snap-start h-[10vh]">
+        <div className="snap-start h-[20vh]">
            <FooterSection />
         </div>
       </div>

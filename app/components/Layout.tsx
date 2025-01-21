@@ -11,15 +11,26 @@ import { useToast } from "@/hooks/use-toast"
 import { useRouter } from 'next/navigation'
 import { Menu } from 'lucide-react'
 import MobileNav from './MobileNav'
+import FooterSection from './FooterSection'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [showAuthForm, setShowAuthForm] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const { user, login, logout } = useUser()
   const [isLoggingOut, setIsLoggingOut] = useState(false)
+  const [showFooter, setShowFooter] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
   const { toast } = useToast()
+  
+  const handleHomeClick = (e: React.MouseEvent) => {
+    if (pathname === '/') {
+      e.preventDefault()
+      window.location.reload()
+    } else {
+      router.push('/')
+    }
+  }
 
   useEffect(() => {
       const handleResize = () => {
@@ -43,6 +54,26 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       router.push('/')
     }
   }, [pathname, user, router, isLoggingOut])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (pathname === '/') return // root 페이지에서는 처리하지 않음
+      
+      const scrollPosition = window.scrollY
+      const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight
+      
+      // 문서 높이에서 현재 스크롤 위치와 화면 높이를 뺀 값이 100px 이하일 때 footer 표시
+      const bottomOffset = documentHeight - (scrollPosition + windowHeight)
+      setShowFooter(bottomOffset <= 100)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    // 초기 로드 시 스크롤 위치 확인
+    handleScroll()
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [pathname])
 
   const navItems = [
     { href: '/', label: '홈' },
@@ -83,14 +114,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className="h-screen w-screen flex flex-col bg-gray-50">
       <header className="bg-gray-500 text-white shadow-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold">
+          {/* 로고 클릭 이벤트 수정 */}
+          <div className="cursor-pointer" onClick={handleHomeClick}>
             <Image
-              src={`/TermCompass_logo.png`}
-              alt={'logo'}
+              src="/TermCompass_logo.png"
+              alt="TermCompass Logo"
               width={50}
               height={50}
             />
-          </Link>
+          </div>
           {isMobile ? (
             <MobileNav
               navItems={navItems}
@@ -139,6 +171,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </header>
       <main className="flex-grow items-center justify-center overflow-y-auto">
         {children}
+        {pathname !== '/' && showFooter && (
+          <div className="transition-opacity duration-300 ease-in-out">
+            <FooterSection />
+          </div>
+        )}
       </main>
       {showAuthForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
