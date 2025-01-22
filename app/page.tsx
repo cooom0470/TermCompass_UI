@@ -20,13 +20,13 @@ export default function Home() {
     if (!container) return
 
     const handleWheel = (e: WheelEvent) => {
-      if (isScrollingRef.current) return // 현재 스크롤 중이라면 무시
+      if (isScrollingRef.current) return
 
       e.preventDefault()
       const direction = e.deltaY > 0 ? 1 : -1
       const height = container.clientHeight
       const targetIndex = Math.min(
-        Math.max(0, activeSection + direction), // 다음 섹션 인덱스 계산
+        Math.max(0, activeSection + direction),
         container.children.length - 1
       )
 
@@ -39,24 +39,53 @@ export default function Home() {
           behavior: 'smooth',
         })
 
-        // 스크롤 완료 후 상태 업데이트 및 플래그 해제
         setTimeout(() => {
           isScrollingRef.current = false
-        }, 500) // 애니메이션 지속 시간과 동기화
+          // 위로 스크롤할 때 스크롤바 위치 초기화
+          if (direction < 0) {
+            container.scrollTop = targetIndex * height
+          }
+        }, 500)
       }
     }
 
-    container.addEventListener('wheel', handleWheel)
-    return () => container.removeEventListener('wheel', handleWheel)
+    const handleManualScroll = () => {
+      if (!isScrollingRef.current) {
+        const currentScroll = container.scrollTop
+        const height = container.clientHeight
+        const newIndex = Math.round(currentScroll / height)
+        
+        if (newIndex !== activeSection) {
+          setActiveSection(newIndex)
+        }
+      }
+    }
+
+    container.addEventListener('wheel', handleWheel, { passive: false })
+    container.addEventListener('scroll', handleManualScroll)
+    
+    return () => {
+      container.removeEventListener('wheel', handleWheel)
+      container.removeEventListener('scroll', handleManualScroll)
+    }
   }, [activeSection])
 
   const scrollToSection = (index: number) => {
     const container = scrollContainerRef.current
     if (container) {
+      const currentIndex = activeSection
       container.scrollTo({
         top: index * container.clientHeight,
         behavior: 'smooth'
       })
+
+      setActiveSection(index)
+
+      if (index < currentIndex) {
+        setTimeout(() => {
+          container.scrollTop = index * container.clientHeight
+        }, 500)
+      }
     }
   }
 
@@ -64,7 +93,7 @@ export default function Home() {
     <Layout>
       <div
         ref={scrollContainerRef}
-        className="h-screen overflow-y-scroll snap-y snap-mandatory scrollbar-hide"
+        className="h-screen overflow-y-scroll snap-y scrollbar-hide"
       >
         <div className="snap-start h-screen">
           <HeroSection />

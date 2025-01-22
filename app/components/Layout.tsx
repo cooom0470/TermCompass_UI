@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation'
 import { Menu } from 'lucide-react'
 import MobileNav from './MobileNav'
 import FooterSection from './FooterSection'
+import FixedFooter from './FixedFooter' // 새로운 footer 컴포넌트 import
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [showAuthForm, setShowAuthForm] = useState(false)
@@ -23,14 +24,35 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const { toast } = useToast()
   
+  // 로그인한 사용자만 접근 가능한 페이지 목록
+  const authenticatedPaths = [
+    '/create-terms',
+    '/modify-terms',
+    '/business-history',
+    '/review-history',
+    '/review-request',
+    '/ai-chatbot'
+  ]
+
+  // 현재 페이지가 로그인 필요 페이지인지 확인
+  const isAuthenticatedPage = authenticatedPaths.some(path => pathname.startsWith(path))
+  
+  
   const handleHomeClick = (e: React.MouseEvent) => {
     if (pathname === '/') {
       e.preventDefault()
-      window.location.reload()
+      window.location.href = '/' // 완전한 페이지 새로고침으로 변경
     } else {
       router.push('/')
     }
   }
+  // root 페이지에서만 스크롤 초기화
+  useEffect(() => {
+    if (pathname === '/') {
+      window.scrollTo(0, 0)
+    }
+  }, [pathname])
+
 
   useEffect(() => {
       const handleResize = () => {
@@ -54,27 +76,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       router.push('/')
     }
   }, [pathname, user, router, isLoggingOut])
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (pathname === '/') return // root 페이지에서는 처리하지 않음
-      
-      const scrollPosition = window.scrollY
-      const windowHeight = window.innerHeight
-      const documentHeight = document.documentElement.scrollHeight
-      
-      // 문서 높이에서 현재 스크롤 위치와 화면 높이를 뺀 값이 100px 이하일 때 footer 표시
-      const bottomOffset = documentHeight - (scrollPosition + windowHeight)
-      setShowFooter(bottomOffset <= 100)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    // 초기 로드 시 스크롤 위치 확인
-    handleScroll()
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [pathname])
-
+  
   const navItems = [
     { href: '/', label: '홈' },
     { href: '/ai-chatbot', label: 'AI 챗봇' },
@@ -96,12 +98,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     ),
   ]
 
-  const handleAuthSubmit = (email: string, password: string, userType: 'PERSONAL' | 'COMPANY', additionalInfo: string, isLogin: boolean) => {
-    // For this example, we'll just log in the user directly
+  const handleAuthSubmit = (
+    name: string,
+    email: string, 
+    password: string, 
+    userType: 'PERSONAL' | 'COMPANY',
+    businessNumber: string,
+    isLogin: boolean
+  ) => {
     login(email, userType)
     setShowAuthForm(false)
-    // You can use the additionalInfo for further processing if needed
-    console.log('Additional Info:', additionalInfo)
+    console.log('Business Number:', businessNumber)
   }
 
   const handleLogout = () => {
@@ -111,10 +118,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen w-full flex flex-col bg-gray-50 ${pathname === '/' ? 'overflow-hidden' : ''}">
       <header className="bg-gray-500 text-white shadow-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          {/* 로고 클릭 이벤트 수정 */}
           <div className="cursor-pointer" onClick={handleHomeClick}>
             <Image
               src="/TermCompass_logo.png"
@@ -169,14 +175,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           )}
         </div>
       </header>
-      <main className="flex-grow items-center justify-center overflow-y-auto">
+      <main className={`flex-grow ${pathname !== '/' ? 'pb-20' : ''}`}> {/* root 페이지가 아닌 경우에만 패딩 추가 */}
         {children}
-        {pathname !== '/' && showFooter && (
-          <div className="transition-opacity duration-300 ease-in-out">
-            <FooterSection />
-          </div>
-        )}
       </main>
+      {pathname !== '/' && <FixedFooter />} 
       {showAuthForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <AuthForm
