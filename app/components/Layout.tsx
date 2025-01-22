@@ -98,17 +98,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     ),
   ]
 
-  const handleAuthSubmit = (
-    name: string,
-    email: string, 
-    password: string, 
-    userType: 'PERSONAL' | 'COMPANY',
-    businessNumber: string,
-    isLogin: boolean
-  ) => {
+  const handleAuthSubmit = (email: string, password: string, userType: 'PERSONAL' | 'COMPANY', additionalInfo: string, isLogin: boolean) => {
+    // For this example, we'll just log in the user directly
     login(email, userType)
     setShowAuthForm(false)
-    console.log('Business Number:', businessNumber)
+    // You can use the additionalInfo for further processing if needed
+    console.log('Additional Info:', additionalInfo)
   }
 
   const handleLogout = () => {
@@ -118,7 +113,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-gray-50 ${pathname === '/' ? 'overflow-hidden' : ''}">
+    <div className="h-screen w-screen flex flex-col bg-gray-50">
       <header className="bg-gray-500 text-white shadow-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="cursor-pointer" onClick={handleHomeClick}>

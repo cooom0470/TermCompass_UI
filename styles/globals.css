@@ -7,7 +7,7 @@ body {
 }
 @font-face {
   font-family: 'goverment';
-  src: url('public/fonts/goverment.ttf') format('truetype');
+  src: url('../app/fonts/goverment.ttf') format('truetype');
   font-weight: normal; /* Add more weights if applicable */
   font-style: normal;
 }

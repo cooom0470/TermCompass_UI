@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Layout from '../components/Layout';
-
-const dummyPosts = Array.from({ length: 50 }, (_, i) => ({
+import Link from 'next/link';
+import BoardBar from "@/app/components/BoardBar";
+//db에서 데이터를 연동해야할곳
+const dummyPosts = Array.from({ length: 500 }, (_, i) => ({
     id: i + 1,
     title: `${i + 1} 번째 게시글`,
     author: `작성자 ${i + 1}`,
@@ -36,9 +38,12 @@ export default function BoardPage() {
     );
 
     const handlePageChange = (page: number) => {
-        router.push(`/board?page=${page}`);
+        const params = new URLSearchParams(window.location.search);
+        params.set("page", page.toString());
+        router.push(`/board?${params.toString()}`);
         setCurrentPage(page);
     };
+
 
     return (
         <Layout>
@@ -90,9 +95,9 @@ export default function BoardPage() {
                             <tr key={post.id} className="hover:bg-gray-50">
                                 <td className="px-4 py-2 border-t border-b border-gray-300 text-center">{post.id}</td>
                                 <td className="px-4 py-2 border-t border-b text-left">
-                                    <a href={`/board/${post.id}`} className="text-blue-500 hover:underline">
+                                    <Link href={`/board/${post.id}`} className=" hover:underline">
                                         {post.title}
-                                    </a>
+                                    </Link>
                                 </td>
                                 <td className="px-4 py-2 border-t border-b text-center">{post.author}</td>
                                 <td className="px-4 py-2 border-t border-b text-center">{post.date}</td>
@@ -104,54 +109,73 @@ export default function BoardPage() {
 
                     {/* 페이지네이션 */}
                     <div className="flex justify-center mt-4">
-                        <ul className="flex space-x-2">
-                            {Array.from({length: totalPages}, (_, i) => i + 1).map((page) => (
-                                <li key={page}>
-                                    <button
-                                        onClick={() => handlePageChange(page)}
-                                        className={`px-4 py-2 border ${
-                                            currentPage === page
-                                                ? "bg-blue-500 text-white"
-                                                : "bg-white text-gray-700"
-                                        } hover:bg-blue-100`}
-                                    >
-                                        {page}
-                                    </button>
-                                </li>
-                            ))}
+                        <ul className="flex space-x-2 items-center">
+                            {/* 이전 5페이지 버튼 */}
+                            <li>
+                                <button
+                                    onClick={() => handlePageChange(Math.max(currentPage - 5, 1))}
+                                    className={`px-4 py-2 border ${
+                                        currentPage <= 5
+                                            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                                            : "bg-white text-gray-700 hover:bg-blue-100"
+                                    }`}
+                                    disabled={currentPage <= 5} // 처음 5페이지 이하에서 비활성화
+                                >
+                                    &lt; 이전
+                                </button>
+                            </li>
+
+                            {/* 페이지 번호 */}
+                            {Array.from({length: totalPages}, (_, i) => i + 1)
+                                .slice(
+                                    Math.floor((currentPage - 1) / 5) * 5, // 현재 페이지 기준으로 5의 배수 페이지 그룹 시작
+                                    Math.min(
+                                        Math.floor((currentPage - 1) / 5) * 5 + 5, // 현재 그룹의 마지막 페이지 번호
+                                        totalPages
+                                    )
+                                )
+                                .map((page) => (
+                                    <li key={page}>
+                                        <button
+                                            onClick={() => handlePageChange(page)}
+                                            className={`px-4 py-2 border ${
+                                                currentPage === page
+                                                    ? "bg-gray-700 text-white"
+                                                    : "bg-white text-gray-700"
+                                            } hover:bg-blue-100`}
+                                        >
+                                            {page}
+                                        </button>
+                                    </li>
+                                ))}
+
+                            {/* 다음 5페이지 버튼 */}
+                            <li>
+                                <button
+                                    onClick={() =>
+                                        handlePageChange(
+                                            Math.min(currentPage + 5, totalPages)
+                                        )
+                                    }
+                                    className={`px-4 py-2 border ${
+                                        currentPage + 5 > totalPages
+                                            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                                            : "bg-white text-gray-700 hover:bg-blue-100"
+                                    }`}
+                                    disabled={currentPage + 5 > totalPages} // 마지막 페이지 그룹에서 비활성화
+                                >
+                                    다음 &gt;
+                                </button>
+                            </li>
                         </ul>
                     </div>
+
+
                 </div>
 
                 {/* 우측 메뉴바 */}
-                <div className="w-[10%] fixed h-[20%] top-[26%] right-[20%] min-w-[10%]  bg-gray-200 p-4 border-l">
-                    <table className=''>
-
-                    </table>
-                    <h2 className="text-xl font-bold mb-4">메뉴</h2>
-                    <ul className="space-y-2">
-                        <li>
-                            <a href="/menu1" className="text-blue-500 hover:underline">
-                                메뉴 1
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/menu2" className="text-blue-500 hover:underline">
-                                메뉴 2
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/menu3" className="text-blue-500 hover:underline">
-                                메뉴 3
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/menu4" className="text-blue-500 hover:underline">
-                                메뉴 4
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+               <BoardBar>
+               </BoardBar>
             </div>
         </Layout>
     );
