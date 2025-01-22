@@ -66,23 +66,15 @@ export default function ServicesSection() {
   };
 
   return (
-    <section className="h-[calc(100vh-5rem)] py-4 bg-gray-100 flex flex-col">
-      <div className="container mx-auto px-4 flex flex-col justify-between h-full">
-        <h3
-          className="text-lg sm:text-2xl font-bold text-center flex-none"
-          style={{
-            paddingTop: 'calc(3vh)',
-            marginTop: 'calc(4vh)',
-            marginBottom: 'calc(6vh)',
-            fontSize: 'calc(1rem + 1vw)',
-          }}
-        >
+    <section className="h-screen py-4 bg-gray-100 flex flex-col overflow-hidden">
+      <div className="container mx-auto px-4 flex flex-col h-full">
+        <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-center mb-6">
           사이트들의 약관의 평가를 한눈에!
         </h3>
 
-        <div className="relative overflow-hidden flex-auto mb-6">
+        <div className="relative h-[35%] mb-6">
           <div
-            className="flex transition-transform duration-500 gap-6 h-full"
+            className="flex transition-transform duration-500 h-full"
             style={{
               transform: `translateX(-${(currentIndex / topWebsites.length) * 100}%)`,
             }}
@@ -90,83 +82,39 @@ export default function ServicesSection() {
             {topWebsites.map((website, index) => (
               <div
                 key={index}
-                className="w-full md:w-1/3 flex-shrink-0 p-6 pl-12 border rounded-lg shadow-md bg-white h-full flex flex-col justify-between"
-                style={{
-                  height: 'calc(30vh)',
-                }}
+                className="w-1/3 flex-shrink-0 p-4 border rounded-lg shadow-md bg-white mx-2"
               >
-                <div
-                  className="flex flex-col md:flex-row items-center justify-between gap-4 mb-4"
-                  style={{
-                    marginBottom: 'calc(1vh)',
-                  }}
-                >
-                  <div className="w-full md:w-1/6">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10">
                     <img
                       src="/TermCompass_logo.png"
                       alt="Example"
-                      className="w-full h-auto rounded-lg shadow-lg object-cover"
+                      className="w-full h-auto rounded-lg shadow-lg"
                     />
                   </div>
-                  <div className="w-full md:w-3/4">
-                    <h3
-                      className="text-xl font-bold"
-                      style={{
-                        fontSize: 'calc(1rem + 0.5vw)',
-                      }}
-                    >
-                      {website.name}
-                    </h3>
-                  </div>
+                  <h3 className="text-base font-bold">
+                    {website.name}
+                  </h3>
                 </div>
-                <div
-                  className="flex flex-col md:flex-row gap-2"
-                  style={{
-                    marginTop: 'calc(2vh)',
-                    flexGrow: 1,
-                  }}
-                >
-                  <div className="w-full md:w-1/2">
-                    <h4
-                      className="text-lg font-semibold text-green-600"
-                      style={{
-                        fontSize: 'calc(1.5vw)',
-                      }}
-                    >
+
+                <div className="flex gap-4 h-[calc(100%-3.5rem)]">
+                  <div className="w-1/2">
+                    <h4 className="text-sm font-semibold text-green-600 mb-2">
                       장점
                     </h4>
-                    <ul className="list-disc list-inside text-gray-700 pl-4">
+                    <ul className="list-disc list-inside text-sm text-gray-700">
                       {website.benefits.map((benefit, i) => (
-                        <li
-                          key={i}
-                          style={{
-                            fontSize: 'calc(1vw)',
-                          }}
-                        >
-                          {benefit}
-                        </li>
+                        <li key={i} className="mb-1">{benefit}</li>
                       ))}
                     </ul>
                   </div>
-                  <div className="w-full md:w-1/2">
-                    <h4
-                      className="text-lg font-semibold text-red-600"
-                      style={{
-                        fontSize: 'calc(1.5vw)',
-                      }}
-                    >
+                  <div className="w-1/2">
+                    <h4 className="text-sm font-semibold text-red-600 mb-2">
                       단점
                     </h4>
-                    <ul className="list-disc list-inside text-gray-700 pl-4">
+                    <ul className="list-disc list-inside text-sm text-gray-700">
                       {website.drawbacks.map((drawback, i) => (
-                        <li
-                          key={i}
-                          style={{
-                            fontSize: 'calc(1vw)',
-                          }}
-                        >
-                          {drawback}
-                        </li>
+                        <li key={i} className="mb-1">{drawback}</li>
                       ))}
                     </ul>
                   </div>
@@ -174,9 +122,10 @@ export default function ServicesSection() {
               </div>
             ))}
           </div>
+
           <Button
             onClick={prevSlide}
-            className="absolute top-1/2 left-2 transform -translate-y-1/2 opacity-50"
+            className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/80 hover:bg-white"
             variant="outline"
             size="icon"
           >
@@ -184,7 +133,7 @@ export default function ServicesSection() {
           </Button>
           <Button
             onClick={nextSlide}
-            className="absolute top-1/2 right-2 transform -translate-y-1/2 opacity-50"
+            className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/80 hover:bg-white"
             variant="outline"
             size="icon"
           >
@@ -192,31 +141,30 @@ export default function ServicesSection() {
           </Button>
         </div>
 
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 flex-none"
-          style={{
-            marginBottom: `calc(5vh)`,
-            height: 'calc(25vh)',
-          }}
-        >
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 h-[45%]">
           {services.map((service, index) => (
             <Link href={service.url} key={index} legacyBehavior>
-              <a onClick={(e) => handleCardClick(e, service.url)} className="cursor-pointer">
+              <a 
+                onClick={(e) => handleCardClick(e, service.url)} 
+                className="h-full"
+              >
                 <div className="flip-card h-full">
                   <div className="flip-card-inner">
-                    <Card className="flip-card-front h-full flex flex-col items-center justify-between">
-                      <CardHeader className="items-center">
-                        <div className="w-12 h-12 mb-4 text-blue-600">
-                          <service.icon className="w-full h-full" />
-                        </div>
-                        <CardTitle>{service.title}</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <CardDescription>{service.description}</CardDescription>
-                      </CardContent>
+                    <Card className="flip-card-front h-full flex flex-col items-center justify-center p-4">
+                      <div className="w-12 h-12 mb-3 text-blue-600">
+                        <service.icon className="w-full h-full" />
+                      </div>
+                      <CardTitle className="text-base lg:text-lg text-center mb-2">
+                        {service.title}
+                      </CardTitle>
+                      <CardDescription className="text-sm text-center">
+                        {service.description}
+                      </CardDescription>
                     </Card>
-                    <Card className="flip-card-back h-full flex flex-col justify-center items-center">
-                      <CardDescription>{service.description}</CardDescription>
+                    <Card className="flip-card-back h-full flex flex-col justify-center items-center p-4">
+                      <CardDescription className="text-sm text-center">
+                        {service.description}
+                      </CardDescription>
                     </Card>
                   </div>
                 </div>

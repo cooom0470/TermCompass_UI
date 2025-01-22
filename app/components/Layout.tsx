@@ -76,7 +76,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       router.push('/')
     }
   }, [pathname, user, router, isLoggingOut])
-  
+
   const navItems = [
     { href: '/', label: '홈' },
     { href: '/ai-chatbot', label: 'AI 챗봇' },
@@ -102,8 +102,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     // For this example, we'll just log in the user directly
     login(email, userType)
     setShowAuthForm(false)
-    // You can use the additionalInfo for further processing if needed
-    console.log('Additional Info:', additionalInfo)
+    console.log('Business Number:', businessNumber)
   }
 
   const handleLogout = () => {
@@ -113,7 +112,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen w-full flex flex-col bg-gray-50 ${pathname === '/' ? 'overflow-hidden' : ''}">
       <header className="bg-gray-500 text-white shadow-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="cursor-pointer" onClick={handleHomeClick}>
