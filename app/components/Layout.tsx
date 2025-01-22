@@ -79,7 +79,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="h-screen w-screen flex flex-col bg-gray-50">
-      <header className="bg-gray-500 text-white shadow-md sticky top-0 z-50">
+      <header className="bg-white  shadow-md sticky text-black font-bold top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold">
             <Image
