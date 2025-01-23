@@ -11,15 +11,48 @@ import { useToast } from "@/hooks/use-toast"
 import { useRouter } from 'next/navigation'
 import { Menu } from 'lucide-react'
 import MobileNav from './MobileNav'
+import FooterSection from './FooterSection'
+import FixedFooter from './FixedFooter' // 새로운 footer 컴포넌트 import
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [showAuthForm, setShowAuthForm] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const { user, login, logout } = useUser()
   const [isLoggingOut, setIsLoggingOut] = useState(false)
+  const [showFooter, setShowFooter] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
   const { toast } = useToast()
+  
+  // 로그인한 사용자만 접근 가능한 페이지 목록
+  const authenticatedPaths = [
+    '/create-terms',
+    '/modify-terms',
+    '/business-history',
+    '/review-history',
+    '/review-request',
+    '/ai-chatbot'
+  ]
+
+  // 현재 페이지가 로그인 필요 페이지인지 확인
+  const isAuthenticatedPage = authenticatedPaths.some(path => pathname.startsWith(path))
+  
+  
+  const handleHomeClick = (e: React.MouseEvent) => {
+    if (pathname === '/') {
+      e.preventDefault()
+      window.location.href = '/' // 완전한 페이지 새로고침으로 변경
+    } else {
+      router.push('/')
+    }
+  }
+  // root 페이지에서만 스크롤 초기화
+  useEffect(() => {
+    if (pathname === '/') {
+      window.scrollTo(0, 0)
+    }
+  }, [pathname])
+
 
   useEffect(() => {
       const handleResize = () => {
@@ -43,7 +76,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       router.push('/')
     }
   }, [pathname, user, router, isLoggingOut])
-
+  
   const navItems = [
     { href: '/', label: '홈' },
     { href: '/ai-chatbot', label: 'AI 챗봇' },
@@ -65,10 +98,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     ),
   ]
 
-  const handleAuthSubmit = (name: string, email: string, password: string, userType: 'PERSONAL' | 'COMPANY', businessNumber: string, isLogin: boolean) => {
+  const handleAuthSubmit = (email: string, password: string, userType: 'PERSONAL' | 'COMPANY', additionalInfo: string, isLogin: boolean) => {
     // For this example, we'll just log in the user directly
     login(email, userType)
     setShowAuthForm(false)
+    // You can use the additionalInfo for further processing if needed
+    console.log('Additional Info:', additionalInfo)
   }
 
   const handleLogout = () => {
@@ -79,16 +114,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="h-screen w-screen flex flex-col bg-gray-50">
-      <header className="bg-white  shadow-md sticky text-black font-bold top-0 z-50">
+      <header className="bg-gray-500 text-white shadow-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold">
+          <div className="cursor-pointer" onClick={handleHomeClick}>
             <Image
-              src={`/TermCompass_logo.png`}
-              alt={'logo'}
+              src="/TermCompass_logo.png"
+              alt="TermCompass Logo"
               width={50}
               height={50}
             />
-          </Link>
+          </div>
           {isMobile ? (
             <MobileNav
               navItems={navItems}
@@ -135,9 +170,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           )}
         </div>
       </header>
-      <main className="flex-grow items-center justify-center overflow-y-auto">
+      <main className={`flex-grow ${pathname !== '/' ? 'pb-20' : ''}`}> {/* root 페이지가 아닌 경우에만 패딩 추가 */}
         {children}
       </main>
+      {pathname !== '/' && <FixedFooter />} 
       {showAuthForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <AuthForm
