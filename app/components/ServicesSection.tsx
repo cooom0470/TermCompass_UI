@@ -96,25 +96,54 @@ export default function ServicesSection() {
                     {website.name}
                   </h3>
                 </div>
-
-                <div className="flex gap-4 h-[calc(100%-3.5rem)]">
-                  <div className="w-1/2">
-                    <h4 className="text-sm font-semibold text-green-600 mb-2">
+                <div
+                  className="flex flex-col md:flex-row gap-2"
+                  style={{
+                    marginTop: 'calc(2vh)',
+                    flexGrow: 1,
+                  }}
+                >
+                  <div className="w-full md:w-1/2">
+                    <h4
+                      className="text-lg font-semibold text-green-600"
+                      style={{
+                        fontSize: 'calc(1.5vw)',
+                      }}
+                    >
                       장점
                     </h4>
                     <ul className="list-disc list-inside text-sm text-gray-700">
                       {website.benefits.map((benefit, i) => (
-                        <li key={i} className="mb-1">{benefit}</li>
+                        <li
+                          key={i}
+                          style={{
+                            fontSize: 'calc(1vw)',
+                          }}
+                        >
+                          {benefit}
+                        </li>
                       ))}
                     </ul>
                   </div>
-                  <div className="w-1/2">
-                    <h4 className="text-sm font-semibold text-red-600 mb-2">
+                  <div className="w-full md:w-1/2">
+                    <h4
+                      className="text-lg font-semibold text-red-600"
+                      style={{
+                        fontSize: 'calc(1.5vw)',
+                      }}
+                    >
                       단점
                     </h4>
                     <ul className="list-disc list-inside text-sm text-gray-700">
                       {website.drawbacks.map((drawback, i) => (
-                        <li key={i} className="mb-1">{drawback}</li>
+                        <li
+                          key={i}
+                          style={{
+                            fontSize: 'calc(1vw)',
+                          }}
+                        >
+                          {drawback}
+                        </li>
                       ))}
                     </ul>
                   </div>
