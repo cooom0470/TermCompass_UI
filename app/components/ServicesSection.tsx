@@ -130,7 +130,7 @@ export default function ServicesSection() {
                     <h4
                       className="text-lg font-semibold text-green-600"
                       style={{
-                        fontSize: 'calc(1.5vw)',
+                        fontSize: 'clamp(16px, 1.5vw, 24px)',
                       }}
                     >
                       장점
@@ -140,7 +140,7 @@ export default function ServicesSection() {
                         <li
                           key={i}
                           style={{
-                            fontSize: 'calc(1vw)',
+                            fontSize: 'clamp(12px, 1vw, 18px)',
                           }}
                         >
                           {benefit}
@@ -152,7 +152,7 @@ export default function ServicesSection() {
                     <h4
                       className="text-lg font-semibold text-red-600"
                       style={{
-                        fontSize: 'calc(1.5vw)',
+                        fontSize: 'clamp(16px, 1.5vw, 24px)',
                       }}
                     >
                       단점
@@ -162,7 +162,7 @@ export default function ServicesSection() {
                         <li
                           key={i}
                           style={{
-                            fontSize: 'calc(1vw)',
+                            fontSize: 'clamp(12px, 1vw, 18px)',
                           }}
                         >
                           {drawback}
