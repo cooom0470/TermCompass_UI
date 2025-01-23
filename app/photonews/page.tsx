@@ -13,7 +13,7 @@ const dummyPosts = Array.from({ length: 50 }, (_, i) => ({
     title: `${i + 1} 번째 게시글`,
     author: `작성자 ${i + 1}`,
     date: `2025-01-${String(i + 1).padStart(2, '0')}`,
-    link: `/board/${i + 1}`,
+    link: `/photonews/${i + 1}`,
 }));
 
 export default function BoardPage() {
@@ -27,19 +27,19 @@ export default function BoardPage() {
 
     return (
         <Layout>
-        <BoardPageTemplate
-            title="공지사항"
-            breadcrumb={[
-                { label: '홈', href: '/' },
-                { label: '알림마당', href: '/board' },
-                { label: '게시판', href: '/board' },
-            ]}
-            posts={dummyPosts}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            postsPerPage={postsPerPage}
-            onPageChange={handlePageChange}
-        />
+            <BoardPageTemplate
+                title="포토뉴스"
+                breadcrumb={[
+                    { label: '홈', href: '/' },
+                    { label: '알림마당', href: '/board' },
+                    { label: '포토뉴스', href: '/photonews' },
+                ]}
+                posts={dummyPosts}
+                currentPage={currentPage}
+                totalPages={totalPages}
+                postsPerPage={postsPerPage}
+                onPageChange={handlePageChange}
+            />
         </Layout>
     );
 }
