@@ -12,7 +12,8 @@ import { useRouter } from 'next/navigation'
 import { Menu } from 'lucide-react'
 import MobileNav from './MobileNav'
 import FooterSection from './FooterSection'
-import FixedFooter from './FixedFooter' // 새로운 footer 컴포넌트 import
+import FixedFooter from './FixedFooter'
+import MiniChatbot from './MiniChatbot'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [showAuthForm, setShowAuthForm] = useState(false)
@@ -98,11 +99,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     ),
   ]
 
-  const handleAuthSubmit = (email: string, password: string, userType: 'PERSONAL' | 'COMPANY', additionalInfo: string, isLogin: boolean) => {
-    // For this example, we'll just log in the user directly
+  const handleAuthSubmit = (
+    name: string,
+    email: string,
+    password: string,
+    userType: 'PERSONAL' | 'COMPANY',
+    businessNumber: string,
+    isLogin: boolean
+  ) => {
     login(email, userType)
     setShowAuthForm(false)
-    console.log('Business Number:', businessNumber)
   }
 
   const handleLogout = () => {
@@ -181,6 +187,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           />
         </div>
       )}
+      <MiniChatbot />
     </div>
   )
 }

@@ -75,14 +75,10 @@ export default function BoardPage() {
 
                 </div>
             </div>
-            <div
-                className="flex items-center font-custom space-x-4 px-4 py-2 mx-auto rounded-lg mt-2 text-4xl  mr-[32%] border-b-2 w-[37%] text-left">
-                소통창구
-            </div>
+
             <PostDetail/>
 
-            <div className="container mx-auto px-4 py-8 flex">
-
+            <div className="container w-full mx-auto px-4 py-8 flex ">
                 {/* 우측 메뉴바 */}
                 <BoardBar/>
             </div>

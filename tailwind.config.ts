@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-
+const defaultTheme = require('tailwindcss/defaultTheme');
 const config: Config = {
 	darkMode: ["class"],
 	content: [
@@ -57,7 +57,7 @@ const config: Config = {
 				sm: "calc(var(--radius) - 4px)",
 			},
 			fontFamily: {
-				custom: ["goverment", "sans-serif"], // Correct syntax for fontFamily
+				sans: ['Goverment', ...defaultTheme.fontFamily.sans], // 기본 폰트 설정
 			},
 		},
 	},
