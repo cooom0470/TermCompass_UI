@@ -79,12 +79,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }, [pathname, user, router, isLoggingOut])
 
   const navItems = [
-    { href: '/', label: '홈' },
-    { href: '/ai-chatbot', label: 'AI 챗봇' },
     { href: '/site-analysis', label: '사이트 등급' },
     { href: '/review-request', label: '약관 검토' },
-    { href: '/board', label: '게시판' },
-
       ...(user
       ? user.userType === 'COMPANY'
         ? [
@@ -97,6 +93,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           ]
       : []
     ),
+    { href: '/board', label: '게시판' },
   ]
 
   const handleAuthSubmit = (
