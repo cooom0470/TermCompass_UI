@@ -8,7 +8,7 @@ interface SectionNavigationProps {
 
 const SectionNavigation: React.FC<SectionNavigationProps> = ({ activeSection, onNavigate }) => {
   return (
-    <div className="fixed top-1/4 z-40 right-8 bg-gray-800 bg-opacity-50 p-2 rounded-lg">
+    <div className="fixed bottom-4 z-40 left-8 bg-gray-800 bg-opacity-50 p-2 rounded-lg">
       <div className="flex flex-col space-y-2">
         <Button
           variant={activeSection === 0 ? "default" : "secondary"}
