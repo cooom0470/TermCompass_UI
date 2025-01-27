@@ -18,7 +18,7 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="relative min-h-[calc(100vh-8rem)] h-screen flex items-center justify-center text-gray">
+    <section className="relative h-screen flex items-center justify-center text-gray">
         <div className="relative w-screen h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 text-white">
           <div className="z-10 text-center mb-20">
             <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4">
