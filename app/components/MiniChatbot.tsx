@@ -35,7 +35,7 @@ const MiniChatbot: React.FC = () => {
   // 로그인 상태 확인 함수 (API 호출)
   const checkLoginStatus = async () => {
     try {
-      const response = await fetch('https://1234abcd.ngrok.io/login-status?user_id=guest');
+      const response = await fetch('https://3d93-34-86-158-84.ngrok-free.app/login-status?user_id=guest');
       const data = await response.json();
       setIsLoggedIn(data.is_logged_in);
     } catch (error) {
