@@ -25,123 +25,67 @@ const MiniChatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [input, setInput] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);  // 로그인 여부 상태 추가
+  const [messages, setMessages] = useState<Message[]>([]);
   const chatRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const { user } = useUser();
   const { toast } = useToast();
-  
-  const getWelcomeMessage = () => {
-    if (!user) return '게스트';
-    return user.userType === 'COMPANY' 
-      ? `${user}기업회원님` 
-      : `${user}회원님`;
+
+  // 로그인 상태 확인 함수 (API 호출)
+  const checkLoginStatus = async () => {
+    try {
+      const response = await fetch('https://1234abcd.ngrok.io/login-status?user_id=guest');
+      const data = await response.json();
+      setIsLoggedIn(data.is_logged_in);
+    } catch (error) {
+      console.error('로그인 상태 확인 중 오류 발생:', error);
+      toast({
+        title: "오류 발생",
+        description: "로그인 상태 확인에 실패했습니다.",
+        variant: "destructive",
+      });
+    }
   };
 
-  const initialMessages: Message[] = [
-    {
-      type: 'bot',
-      content: `안녕하세요! ${getWelcomeMessage()}, 약관나침반 서비스에 오신 것을 환영합니다.`
-    },
-    {
-      type: 'bot',
-      content: '주요 기능을 알아보시겠습니까?',
-      isLink: true,
-      action: () => handleServiceInfo()
-    }
-  ];
-
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
-  const [chatHistories, setChatHistories] = useState<ChatHistory[]>([
-    {
-      id: '1',
-      date: '2024-03-15',
-      summary: '약관 생성 서비스 문의',
-      messages: [
-        { type: 'user', content: '약관 생성은 어떻게 하나요?' },
-        { type: 'bot', content: '약관 생성 서비스는 기업회원 전용 서비스입니다...' }
-      ]
-    },
-    // Add more chat histories as needed
-  ]);
-
-  // 사용자 상태가 변경될 때마다 메시지 업데이트
+  // 컴포넌트가 로드될 때 로그인 상태 확인
   useEffect(() => {
-    setMessages([
-      {
-        type: 'bot',
-        content: `안녕하세요! ${getWelcomeMessage()}, 약관나침반 서비스에 오신 것을 환영합니다.`
-      },
-      {
-        type: 'bot',
-        content: '주요 기능을 알아보시겠습니까?',
-        isLink: true,
-        action: () => handleServiceInfo()
-      }
-    ]);
-  }, [user]);
+    checkLoginStatus();
+  }, []);
 
-  function handleServiceInfo() {
-    const serviceMessages: Message[] = [
-      {
-        type: 'bot',
-        content: '약관나침반의 주요 기능을 소개해드리겠습니다:'
-      },
-      {
-        type: 'bot',
-        content: '1. 사이트 등급 분석: 웹사이트의 약관을 분석하여 등급을 제공합니다.',
-        isLink: true,
-        link: '/site-analysis'
-      },
-      {
-        type: 'bot',
-        content: '2. 약관 검토: AI가 약관의 문제점을 검토하고 개선점을 제안합니다.',
-        isLink: true,
-        link: '/review-request'
-      }
-    ];
-
-    // 기업회원인 경우에만 약관 생성 기능 추가
-    if (user?.userType === 'COMPANY') {
-      serviceMessages.push({
-        type: 'bot',
-        content: '3. 약관 생성: 기업 회원을 위한 맞춤형 약관 생성 서비스를 제공합니다.',
-        isLink: true,
-        link: '/create-terms'
-      });
-    } else {
-      serviceMessages.push({
-        type: 'bot',
-        content: '3. 약관 생성: 기업 회원 전용 서비스입니다. 기업회원으로 로그인하시면 이용하실 수 있습니다.',
-        isLink: true,
-        action: () => {
-          toast({
-            title: "기업회원 전용 서비스",
-            description: "기업회원으로 로그인 후 이용해주세요.",
-            variant: "destructive",
-          });
-        }
-      });
-    }
-
-    setMessages(prev => [...prev, ...serviceMessages]);
-  }
-
-  const handleSend = () => {
+  // 챗봇 메시지 전송 함수
+  const handleSend = async () => {
     if (input.trim() === '') return;
 
-    const userMessage: Message = { type: 'user' as const, content: input };
-    const newMessages = [...messages, userMessage];
-    
-    // 조건 수정(ex. AI 챗봇의 응답 길이가 100자 이상일 때 확장 모드로 전환)
-    if (input === '확장') {
-      setIsExpanded(true);
+    const userMessage: Message = { type: 'user', content: input };
+    setMessages((prev) => [...prev, userMessage]);
+
+    try {
+      // FastAPI 서버에 메시지 전송
+      const response = await fetch('https://1234abcd.ngrok.io/chatbot', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user_id: isLoggedIn ? 'user1' : 'guest',
+          message: input,
+        }),
+      });
+
+      const data = await response.json();
+
+      // API 응답 추가
+      const botMessage: Message = { type: 'bot', content: data.response };
+      setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      console.error('API 요청 중 오류 발생:', error);
+      setMessages((prev) => [
+        ...prev,
+        { type: 'bot', content: '오류가 발생했습니다. 다시 시도해 주세요.' },
+      ]);
     }
 
-    if (input.toLowerCase().includes('기능') || input.toLowerCase().includes('서비스')) {
-      handleServiceInfo();
-    }
-
-    setMessages(newMessages);
     setInput('');
   };
 
@@ -152,21 +96,21 @@ const MiniChatbot: React.FC = () => {
     }
   };
 
+  const loadChatHistory = (history: ChatHistory) => {
+    setMessages(history.messages);
+  };
+
   useEffect(() => {
     if (chatRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }
   }, [messages]);
 
-  const loadChatHistory = (history: ChatHistory) => {
-    setMessages(history.messages);
-  };
-
   return (
     <div className={`fixed bottom-4 right-4 z-50 transition-all duration-300 ${
-      isOpen 
-        ? isExpanded 
-          ? 'w-[70vw] h-[70vh]' 
+      isOpen
+        ? isExpanded
+          ? 'w-[70vw] h-[70vh]'
           : 'w-80 h-[450px]'
         : 'w-12 h-12'
     }`}>
@@ -181,38 +125,36 @@ const MiniChatbot: React.FC = () => {
                   이전 대화 기록
                 </h3>
                 <div className="space-y-2">
-                  {chatHistories.map((history) => (
-                    <div
-                      key={history.id}
-                      onClick={() => loadChatHistory(history)}
-                      className="p-3 bg-white/80 backdrop-blur-sm rounded-lg cursor-pointer 
-                               hover:bg-blue-50 transition-all duration-200 border border-gray-100
-                               hover:border-blue-200"
-                    >
-                      <div className="text-xs text-gray-500">{history.date}</div>
-                      <div className="text-sm text-gray-700 line-clamp-2">
-                        {history.summary}
-                      </div>
-                    </div>
-                  ))}
+                  {/* 예시 채팅 히스토리 */}
+                  <div
+                    onClick={() => loadChatHistory({
+                      id: '1',
+                      date: '2024-03-15',
+                      summary: '약관 생성 서비스 문의',
+                      messages: [
+                        { type: 'user', content: '약관 생성은 어떻게 하나요?' },
+                        { type: 'bot', content: '약관 생성 서비스는 기업회원 전용입니다.' },
+                      ],
+                    })}
+                    className="p-3 bg-white/80 backdrop-blur-sm rounded-lg cursor-pointer hover:bg-blue-50 transition-all duration-200 border border-gray-100 hover:border-blue-200"
+                  >
+                    <div className="text-xs text-gray-500">2024-03-15</div>
+                    <div className="text-sm text-gray-700 line-clamp-2">약관 생성 서비스 문의</div>
+                  </div>
                 </div>
               </div>
             </div>
           )}
 
           {/* 메인 챗봇 영역 */}
-          <div className={`flex flex-col h-full flex-grow bg-white`}>
+          <div className="flex flex-col h-full flex-grow bg-white">
             {/* 챗봇 헤더 */}
             <div className="flex justify-between items-center p-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white">
               <div className="flex items-center gap-2">
                 <span className="font-semibold">약관나침반 도우미</span>
                 {user && (
                   <div className="flex items-center gap-1 bg-blue-500 px-2 py-1 rounded-full text-xs">
-                    {user.userType === 'COMPANY' ? (
-                      <Building2 size={12} />
-                    ) : (
-                      <User size={12} />
-                    )}
+                    {user.userType === 'COMPANY' ? <Building2 size={12} /> : <User size={12} />}
                     {user.userType === 'COMPANY' ? '기업회원' : '개인회원'}
                   </div>
                 )}
@@ -229,35 +171,14 @@ const MiniChatbot: React.FC = () => {
 
             {/* 메시지 영역 */}
             <div ref={chatRef} className="flex-1 overflow-y-auto p-4 space-y-4">
-              {!isExpanded && user && messages.length > 2 && (
-                <div className="flex justify-center mb-4">
-                  <button
-                    onClick={() => setIsExpanded(true)}
-                    className="text-xs text-gray-500 bg-gray-100 px-3 py-1.5 rounded-full hover:bg-gray-200 transition-colors flex items-center gap-1"
-                  >
-                    <Maximize2 size={12} />
-                    이전 대화 기록 보기
-                  </button>
-                </div>
-              )}
               {messages.map((message, index) => (
-                <div
-                  key={index}
-                  className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
-                >
+                <div key={index} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div
                     className={`max-w-[80%] p-3 rounded-lg ${
                       message.type === 'user'
                         ? 'bg-blue-600 text-white rounded-br-none'
                         : 'bg-gray-100 text-gray-800 rounded-bl-none'
-                    } ${(message.isLink || message.action) ? 'cursor-pointer hover:opacity-80' : ''}`}
-                    onClick={() => {
-                      if (message.link) {
-                        router.push(message.link);
-                      } else if (message.action) {
-                        message.action();
-                      }
-                    }}
+                    }`}
                   >
                     {message.content}
                   </div>
@@ -287,13 +208,11 @@ const MiniChatbot: React.FC = () => {
           </div>
         </div>
       )}
-      
+
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="w-full h-full bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-full 
-                   flex items-center justify-center hover:from-blue-700 hover:to-blue-600 
-                   transition-all duration-300 shadow-lg"
+          className="w-full h-full bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-full flex items-center justify-center hover:from-blue-700 hover:to-blue-600 transition-all duration-300 shadow-lg"
         >
           <MessageCircle size={24} />
         </button>
@@ -302,4 +221,4 @@ const MiniChatbot: React.FC = () => {
   );
 };
 
-export default MiniChatbot; 
+export default MiniChatbot;
