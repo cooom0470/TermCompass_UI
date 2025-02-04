@@ -32,12 +32,11 @@ export default function AIChatbot() {
 
     try {
       // FastAPI 서버에 메시지 전송
-      const response = await fetch('https://3d93-34-86-158-84.ngrok-free.app/chatbot', {
+      const response = await fetch('https://3e9b-35-247-132-166.ngrok-free.app/chatbot', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          user_id: 'user1',  // 로그인된 사용자로 가정
-          message: input,
+          question: input,  // 수정된 부분: message -> question
         }),
       })
 
